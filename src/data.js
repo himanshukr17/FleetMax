@@ -1,0 +1,62 @@
+export default truckdata = [
+    {
+        VEHICLE_NO: "HR12Y4063",
+        LOCATION: "New Delhi",
+        DRIVER_NAME:'Rahul',
+        FROM:'Noida',
+        TO:'Mumbai',
+        STARTING_LAT:"28.558690",
+        STARTING_LONG:"77.331042",
+        CURRENT_LAT:"28.591507",
+        CURRENT_LONG:"77.161113",
+        DESTINATION_LAT:'19.065388',
+        DESTINATION_LONG:'72.846676',
+        TIME: "11:20 Am",
+        STATUS:"delayed"
+    },
+    {
+        VEHICLE_NO: "DL3CBR3392",
+        LOCATION: "Lucknow",
+        FROM:'Delhi',
+        STARTING_LAT:"28.695554",
+        STARTING_LONG:"77.115719",
+        CURRENT_LAT:"26.868635",
+        CURRENT_LONG:"80.723011",
+        DESTINATION_LAT:'25.358333',
+        DESTINATION_LONG:'82.946238',
+        DRIVER_NAME:'Ankur',
+        TO:'Varanasi',
+        TIME: "10:45 Am",
+        STATUS:"ontime"
+    },
+    {
+        VEHICLE_NO: "HR10Y4836",
+        LOCATION: "Rohtak",
+        FROM:'Noida',
+        STARTING_LAT:"28.558690",
+        STARTING_LONG:"77.331042",
+        CURRENT_LAT:"28.591507",
+        CURRENT_LONG:"77.161113",
+        DESTINATION_LAT:'19.065388',
+        DESTINATION_LONG:'72.846676',
+        DRIVER_NAME:'Rakesh',
+        TO:'Dehradun',
+        TIME: "01:20 Pm",
+        STATUS:"delayed"
+    },
+    {
+        VEHICLE_NO: "UK02K6644",
+        LOCATION: "Haridwar",
+        FROM:'Gujrat',
+        STARTING_LAT:"28.558690",
+        STARTING_LONG:"77.331042",
+        CURRENT_LAT:"28.591507",
+        CURRENT_LONG:"77.161113",
+        DESTINATION_LAT:'19.065388',
+        DESTINATION_LONG:'72.846676',
+        DRIVER_NAME:'Anil',
+        TO:'Delhi',
+        TIME: "02:50 Pm",
+        STATUS:"ontime"
+    }
+]
