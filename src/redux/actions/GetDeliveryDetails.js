@@ -7,7 +7,7 @@ export const GetDeliveryDetails = (data) => async (dispatch, getState) => {
        data
         ,{
             headers: {
-                'Authorization':'Basic c2ItYjEyZTg4MjEtOWRlMy00NzA3LWE3YjctYjVlNDQwZDMwMzcxIWIxNDIwMDJ8aXQtcnQtOTRiOWRiMDB0cmlhbCFiMjY2NTU6YzYzOWM4ZGMtYWU0MC00OGQ0LThmZDQtMzNkM2IxYjRmZDM4JHZaYkNCYTlMZUxWM3lzN2liRUlrTkVyWU9mdE9xS0Rmc05KdzVUQzM4Z1U9',
+                'Authorization':'Basic c2ItYzZjYTVmMWItNjJlZC00Yzg2LTgzNzQtOWZkZmIwZmM2NjkxIWIxMjIwfGl0LXJ0LW5lYy1kZXYtMi1rNWl6emU3OCFiMTQ4OjMyOTk0OWRmLTQ5OGQtNDY1MC05NWJmLTZiNzJmMGEzYmM3OCRCbnNZc1JFMl9rdWdBT19wSkw3OGlSZ1ZfOWlIcW85UTJ5Ulh6OW5kT05nPQ==',
                 'Content-Type': 'text/plain',
                 'Cookie': 'SAP_SESSIONID_HDA_220=0_8PSy_cEOosyNwF7TNIK-WB19PRGRHtqa4AUFalBrA%3d; sap-usercontext=sap-client=220'
             }
@@ -43,7 +43,7 @@ export const GetDeliveryDetails = (data) => async (dispatch, getState) => {
        data
         ,{
             headers: {
-                'Authorization':'Basic c2ItYjEyZTg4MjEtOWRlMy00NzA3LWE3YjctYjVlNDQwZDMwMzcxIWIxNDIwMDJ8aXQtcnQtOTRiOWRiMDB0cmlhbCFiMjY2NTU6YzYzOWM4ZGMtYWU0MC00OGQ0LThmZDQtMzNkM2IxYjRmZDM4JHZaYkNCYTlMZUxWM3lzN2liRUlrTkVyWU9mdE9xS0Rmc05KdzVUQzM4Z1U9',
+                'Authorization':'Basic c2ItYzZjYTVmMWItNjJlZC00Yzg2LTgzNzQtOWZkZmIwZmM2NjkxIWIxMjIwfGl0LXJ0LW5lYy1kZXYtMi1rNWl6emU3OCFiMTQ4OjMyOTk0OWRmLTQ5OGQtNDY1MC05NWJmLTZiNzJmMGEzYmM3OCRCbnNZc1JFMl9rdWdBT19wSkw3OGlSZ1ZfOWlIcW85UTJ5Ulh6OW5kT05nPQ==',
                 'Content-Type': 'application/json',
                 'Cookie': 'SAP_SESSIONID_HDA_220=0_8PSy_cEOosyNwF7TNIK-WB19PRGRHtqa4AUFalBrA%3d; sap-usercontext=sap-client=220'
             }

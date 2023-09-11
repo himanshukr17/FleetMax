@@ -33,7 +33,7 @@ const Content = (props) => {
 const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
-    backgroundColor: 'transparent',
+    backgroundColor: '#efeeee',
     ...Platform.select({
       ios: {
         padding: 14

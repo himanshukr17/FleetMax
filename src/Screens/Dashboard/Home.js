@@ -52,27 +52,27 @@ const Home = (props) => {
             <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
             <Content>
                 {/* <LinearGradient colors={['#FFB300', "white"]} style={{ marginLeft: -10, marginRight: -10 }}> */}
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 5, paddingHorizontal: 10, paddingTop: 10, marginLeft: 0, marginRight: -20 }}>
-                        <View>
-                            <Typography type='regular' size={29}>Welcome</Typography>
-                            {/* <Typography type='cursive' size={26}>Himanshu Sharma</Typography> */}
-                        </View>
-                        <View style={{ marginRight: 20 }}>
-                            <Avatar
-                                rounded
-                                borderRadius={150 / 2}
-                                borderWidth={1}
-                                borderColor={"white"}
-                                size={80}
-                                source={require('../../Asets/box.png')}
-                            />
-                        </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 5, paddingHorizontal: 10, paddingTop: 10, marginLeft: 0, marginRight: -20 }}>
+                    <View>
+                        <Typography type='regular' size={29}>Welcome</Typography>
+                        {/* <Typography type='cursive' size={26}>Himanshu Sharma</Typography> */}
                     </View>
+                    <View style={{ marginRight: 20 }}>
+                        <Avatar
+                            rounded
+                            borderRadius={150 / 2}
+                            borderWidth={1}
+                            borderColor={"white"}
+                            size={80}
+                            source={require('../../Asets/box.png')}
+                        />
+                    </View>
+                </View>
                 {/* </LinearGradient> */}
                 <View style={{ marginTop: 10, backgroundColor: '#f9f9f9', marginLeft: -10, marginRight: -10, padding: 5 }}>
                     <View style={{ borderRadius: 10, borderWidth: 0.5, overflow: 'hidden' }}>
                         <MapView
-                            style={[{ alignItems: 'center', height: 310, borderRadius: 10 }]}
+                            style={[{ alignItems: 'center', height: 270, borderRadius: 10 }]}
                             initialRegion={{
                                 latitude: (28.561414),
                                 longitude: (77.334147),
@@ -115,22 +115,22 @@ const Home = (props) => {
                     </View>
                 </View>
                 <View>
-                    <View style={{ flexDirection: 'row',padding:15,justifyContent:'space-between',paddingRight:20 }}>
-                    <TouchableOpacity onPress={()=>props.navigation.navigate("GetDirection")}>
-                        <View style={{width:100}}>
-                            <LottieAnimation
-                                source={require('../../Asets/Loader/direction.json')}
-                                loop={false}
-                                speed={1}
-                                // ref={menref}
-                                // onAnimationFinish={mentrigger}
-                                autoPlay={true}
-                                style={{ width: 100, height: 85, marginBottom: -10, marginTop: -2 }}
-                            />
-                            <Typography style={{ alignSelf: 'center',textAlign: 'center'}}>Get Delivery Details</Typography>
-                        </View>
+                    <View style={{ flexDirection: 'row', padding: 15, justifyContent: 'space-between', paddingRight: 20 }}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate("GetDirection")}>
+                            <View style={{ width: 100 }}>
+                                <LottieAnimation
+                                    source={require('../../Asets/Loader/direction.json')}
+                                    loop={false}
+                                    speed={1}
+                                    // ref={menref}
+                                    // onAnimationFinish={mentrigger}
+                                    autoPlay={true}
+                                    style={{ width: 100, height: 85, marginBottom: -10, marginTop: -2 }}
+                                />
+                                <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Get Delivery Details</Typography>
+                            </View>
                         </TouchableOpacity>
-                        <View  style={{width:100}}>
+                        <View style={{ width: 100 }}>
                             <View>
                                 <LottieAnimation
                                     source={require('../../Asets/Loader/Contact.json')}
@@ -142,9 +142,9 @@ const Home = (props) => {
                                     style={{ width: 100, height: 95, marginBottom: -20, marginTop: -4 }}
                                 />
                             </View>
-                                <Typography style={{ alignSelf: 'center' ,textAlign: 'center'}}>Get Vehicle Details</Typography>
+                            <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Get Vehicle Details</Typography>
                         </View>
-                        <View  style={{width:100}}>
+                        <View style={{ width: 100 }}>
                             <View>
                                 <LottieAnimation
                                     source={require('../../Asets/Loader/driverd.json')}
@@ -156,8 +156,24 @@ const Home = (props) => {
                                     style={{ width: 100, height: 95, marginBottom: -10, marginTop: -2 }}
                                 />
                             </View>
-                                <Typography style={{ alignSelf: 'center' ,textAlign: 'center'}}>Get Driver Details</Typography>
+                            <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Get Driver Details</Typography>
                         </View>
+                    </View>
+                    <View style={{ flexDirection: 'row', padding: 15, justifyContent: 'space-between', paddingRight: 20 }}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate("Booking")}>
+                            <View style={{ width: 100 }}>
+                                <LottieAnimation
+                                    source={require('../../Asets/Loader/booking.json')}
+                                    loop={false}
+                                    speed={1}
+                                    // ref={menref}
+                                    // onAnimationFinish={mentrigger}
+                                    autoPlay={true}
+                                    style={{ width: 100, height: 100, marginBottom: 0, marginLeft: -10, marginTop: -2 }}
+                                />
+                                <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Booking Details</Typography>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Content>
