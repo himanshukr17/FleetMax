@@ -19,14 +19,16 @@ const CustomInput = (props) => {
 
         <ThemeProvider theme={theme}>
             <TextInput
-            left={
-                (icon&&<TextInput.Icon
-                  icon={icon}
-                  color="#22C55E"
-                //   style={styles.leftIcon as StyleProp<ViewStyle>}
-                //   size={responsiveFontSize(3)}
-                />)
-              }
+                left={
+                    (icon && <TextInput.Icon
+                        icon={icon}
+                        color="#22C55E"
+                    //   style={styles.leftIcon as StyleProp<ViewStyle>}
+                    //   size={responsiveFontSize(3)}
+                    />)
+                }
+                selectionColor="black"
+                activeUnderlineColor="black"
                 outlineStyle={styles.inputContainerStyle}
                 // labelStyle={styles.labelStyle}
                 // style={styles.container}
@@ -37,9 +39,6 @@ const CustomInput = (props) => {
                 {...props}
             />
         </ThemeProvider>
-
-
-
     )
 };
 
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
         fontFamily: "Nunito",
         // fontSize: 18,
         color: 'grey',
-        backgroundColor:'white',
+        backgroundColor: 'white',
         borderWidth: 0.5,
         // width: "80%",
         // marginRight: 0,
@@ -83,15 +82,7 @@ const styles = StyleSheet.create({
         marginLeft: 0,
         lineHeight: 18,
         color: theme.colors.textPrimary
-    }
-    ,
-
-
-
+    },
 });
-
-
-
-
 
 export default CustomInput;

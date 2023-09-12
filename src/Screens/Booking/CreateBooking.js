@@ -58,17 +58,103 @@ const CreateBooking = () => {
             </Header>
             <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
             <Content>
-                <View>
-                    <View>
-                        <Typography size={13}>from location</Typography>
+                <View style={{ marginTop: "7%", marginLeft: "3%" }}>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>From Location</Typography>
+                        <Input style={styles.input}
+
+                        />
                     </View>
-                    <View>
-                        <Typography size={13}>to location</Typography>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>To Location</Typography>
+
+                        <Input style={styles.input}
+
+                        />
                     </View>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Date & Time</Typography>
+
+                        <Input style={styles.input}
+
+                        />
+                    </View>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Vehicle Type</Typography>
+
+                        <Input style={styles.input}
+
+                        />
+                    </View>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Vehicle Size</Typography>
+
+                        <Input style={styles.input}
+
+                        />
+                    </View>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Number of Drivers</Typography>
+
+                        <Input style={styles.input}
+
+                        />
+                    </View>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Freight Amount</Typography>
+
+                        <Input style={styles.input}
+
+                        />
+                    </View>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Weight of Load</Typography>
+
+                        <Input style={styles.input}
+
+                        />
+                    </View>
+
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Trip Type</Typography>
+
+                        <Input style={styles.input}
+
+                        />
+                    </View>
+
+                </View>
+
+                <View style={{ alignItems: "center",  alignContent:"center", alignSelf:"center" }}>
+                    <Button
+                        title="Submit"
+                        onPress={() => {}}
+                        style={{ marginTop: 15 }}
+                    />
                 </View>
             </Content>
         </Container>
     )
 }
+
+const styles = StyleSheet.create({
+    feilds: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 10
+    },
+    input: {
+        width: "60%",
+        height: "5%"
+    }
+})
 
 export default (CreateBooking);
