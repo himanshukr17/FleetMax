@@ -19,7 +19,7 @@ import Button from "../../Components/CustomButton/Button";
 import LinearGradient from "react-native-linear-gradient";
 import PieChart from 'react-native-pie-chart'
 import axios from "axios";
-const CreateBooking = () => {
+const CreateBooking = (props) => {
 
     const [menloop, setmenloop] = useState(1)
     const mentrigger = () => {

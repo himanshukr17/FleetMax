@@ -21,7 +21,7 @@ import PieChart from 'react-native-pie-chart'
 import axios from "axios";
 const Booking = (props) => {
 
-    
+
     const [menloop, setmenloop] = useState(1)
     const mentrigger = () => {
         let i = menloop
@@ -75,7 +75,7 @@ const Booking = (props) => {
                         <Typography size={16} bold>Favourable Routes</Typography>
                         {n.map(items => {
                             return (
-                                <TouchableOpacity onPress={()=>props.navigation.navigate("CreateBooking")}>
+                                <TouchableOpacity onPress={() => props.navigation.navigate("CreateBooking")}>
                                     <View style={styles.route}>
                                         <Typography size={14} type={"bold"} style={{ marginBottom: 8 }}>Bangalore to Delhi</Typography>
                                         <Icon
@@ -98,35 +98,37 @@ const Booking = (props) => {
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.chart}>
-                        <View style={{ flexDirection: 'column', flex: 1, paddingRight: 10 }}>
-                            <View style={{ marginBottom: 5 }}>
-                                <Typography size={15} bold>Booking Status</Typography>
-                            </View>
-                            <View style={styles.bookingstatus}>
-                                <Typography size={15} type="bold" colour="#3d961d">Accepted</Typography>
-                                <Typography size={15} colour="#3d961d">185</Typography>
+                        <TouchableWithoutFeedback onPress={()=>props.navigation.navigate("BookingStatus")}>
+                        <View style={styles.chart}>
+                            <View style={{ flexDirection: 'column', flex: 1, paddingRight: 10 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Typography size={15} bold>Booking Status</Typography>
+                                </View>
+                                <View style={styles.bookingstatus}>
+                                    <Typography size={15} type="bold" colour="#3d961d">Accepted</Typography>
+                                    <Typography size={15} colour="#3d961d">185</Typography>
 
+                                </View>
+                                <View style={styles.bookingstatus}>
+                                    <Typography size={15} type="bold" colour="#a4ab1d">Pending</Typography>
+                                    <Typography size={15} colour="#a4ab1d">98</Typography>
+                                </View>
+                                <View style={[styles.bookingstatus, { borderBottomWidth: 0 }]}>
+                                    <Typography size={15} type="bold" colour="#d23a3a">Rejected</Typography>
+                                    <Typography size={15} colour="#d23a3a">100</Typography>
+                                </View>
                             </View>
-                            <View style={styles.bookingstatus}>
-                                <Typography size={15} type="bold" colour="#a4ab1d">Pending</Typography>
-                                <Typography size={15} colour="#a4ab1d">98</Typography>
-                            </View>
-                            <View style={[styles.bookingstatus, { borderBottomWidth: 0 }]}>
-                                <Typography size={15} type="bold" colour="#d23a3a">Rejected</Typography>
-                                <Typography size={15} colour="#d23a3a">100</Typography>
+                            <View style={{ borderLeftWidth: 0.5, paddingLeft: 10 }}>
+                                <PieChart
+                                    widthAndHeight={widthAndHeight}
+                                    series={series}
+                                    sliceColor={sliceColor}
+                                    coverRadius={0.75}
+                                    style={{ borderWidth: 1 }}
+                                />
                             </View>
                         </View>
-                        <View style={{ borderLeftWidth: 0.5, paddingLeft: 10 }}>
-                            <PieChart
-                                widthAndHeight={widthAndHeight}
-                                series={series}
-                                sliceColor={sliceColor}
-                                coverRadius={0.75}
-                                style={{ borderWidth: 1 }}
-                            />
-                        </View>
-                    </View>
+                        </TouchableWithoutFeedback>
                 </Content>
             </Container>
         </>
