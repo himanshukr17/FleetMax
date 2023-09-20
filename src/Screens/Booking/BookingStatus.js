@@ -61,7 +61,9 @@ const BookingStatus = (props) => {
             <Content>
                 {n.map(items => {
                     return (
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback
+                        key={items}
+                        onPress={()=>props.navigation.navigate("BookingStatusDetil")}>
                             <View style={styles.container}>
                                 <View style={[styles.box, { marginRight: 10 }]}>
                                     <View style={styles.tiles}>

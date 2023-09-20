@@ -75,7 +75,9 @@ const Booking = (props) => {
                         <Typography size={16} bold>Favourable Routes</Typography>
                         {n.map(items => {
                             return (
-                                <TouchableOpacity onPress={() => props.navigation.navigate("CreateBooking")}>
+                                <TouchableOpacity 
+                                key={items}
+                                onPress={() => props.navigation.navigate("CreateBooking")}>
                                     <View style={styles.route}>
                                         <Typography size={14} type={"bold"} style={{ marginBottom: 8 }}>Bangalore to Delhi</Typography>
                                         <Icon
@@ -87,7 +89,7 @@ const Booking = (props) => {
                                 </TouchableOpacity>
                             )
                         })}
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate("CreateBooking")}>
                             <View style={[styles.route, { borderBottomWidth: 0 }]}>
                                 <Typography size={14} type={"bold"} style={{ marginBottom: 8 }}>Create new Route</Typography>
                                 <Icon

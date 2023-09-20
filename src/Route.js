@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import Booking from "./Screens/Booking/Booking";
 import CreateBooking from "./Screens/Booking/CreateBooking";
 import BookingStatus from "./Screens/Booking/BookingStatus";
+import BookingStatusDetil from "./Screens/Booking/BookingStatusDetail";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -34,6 +35,7 @@ const Route = (props) => {
                 <Stack.Screen name="GetDirection" component={GetDirection}  options={{ headerShown: false }}/>
                 <Stack.Screen name="BookingStatus" component={BookingStatus}  options={{ headerShown: false }}/>
                 <Stack.Screen name="CreateBooking" component={CreateBooking}  options={{ headerShown: false }}/>
+                <Stack.Screen name="BookingStatusDetil" component={BookingStatusDetil}  options={{ headerShown: false }}/>
                 <Stack.Screen name="GetDirectionDetails" component={GetDirectionDetails}  options={{ headerShown: false }}/>
                 <Stack.Screen name="GetDirectionMoreDetails" component={GetDirectionMoreDetails}  options={{ headerShown: false }}/>
 

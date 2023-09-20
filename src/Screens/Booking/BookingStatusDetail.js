@@ -8,7 +8,6 @@ import Header from "../../Components/Layout/Header";
 import Input from "../../Components/CustomInput/Input"
 import Typography from "../../Components/typography"
 import { Icon } from 'react-native-elements';
-import Footer from "../../Components/Layout/Footer"
 import Search from "../../Components/CustomInput/CustomSearch"
 import LottieAnimation from 'lottie-react-native';
 import Modal from "react-native-modal";
@@ -20,7 +19,7 @@ import Button from "../../Components/CustomButton/Button";
 import LinearGradient from "react-native-linear-gradient";
 import PieChart from 'react-native-pie-chart'
 import axios from "axios";
-const CreateBooking = (props) => {
+const BookingStatusDetil = (props) => {
 
     const [menloop, setmenloop] = useState(1)
     const mentrigger = () => {
@@ -52,7 +51,7 @@ const CreateBooking = (props) => {
                             />
                         </TouchableOpacity>
                         <View>
-                            <Typography type='bold' style={{ marginTop: 5, marginLeft: 7 }} size={19}>Create Booking</Typography>
+                            <Typography type='bold' style={{ marginTop: 5, marginLeft: 7 }} size={19}>Details</Typography>
                         </View>
                     </View>}
                 />
@@ -60,11 +59,18 @@ const CreateBooking = (props) => {
             <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
             <Content>
                 <View style={{ marginTop: "7%", marginLeft: "3%" }}>
-
+                <View style={styles.feilds}>
+                        <Typography size={17}>Order Number</Typography>
+                        <Input style={styles.input}
+                            value="MJK2342"
+                            disabled
+                        />
+                    </View>
                     <View style={styles.feilds}>
                         <Typography size={17}>From Location</Typography>
                         <Input style={styles.input}
-
+                            value="Banglore"
+                            disabled
                         />
                     </View>
 
@@ -72,7 +78,8 @@ const CreateBooking = (props) => {
                         <Typography size={17}>To Location</Typography>
 
                         <Input style={styles.input}
-
+                            disabled
+                            value="Delhi"
                         />
                     </View>
 
@@ -80,7 +87,8 @@ const CreateBooking = (props) => {
                         <Typography size={17}>Date & Time</Typography>
 
                         <Input style={styles.input}
-
+                            disabled
+                            value="12th Sep 2023"
                         />
                     </View>
 
@@ -88,7 +96,8 @@ const CreateBooking = (props) => {
                         <Typography size={17}>Vehicle Type</Typography>
 
                         <Input style={styles.input}
-
+                            value="Container"
+                            disabled
                         />
                     </View>
 
@@ -96,7 +105,8 @@ const CreateBooking = (props) => {
                         <Typography size={17}>Vehicle Size</Typography>
 
                         <Input style={styles.input}
-
+                            value="22ft"
+                            disabled
                         />
                     </View>
 
@@ -104,7 +114,8 @@ const CreateBooking = (props) => {
                         <Typography size={17}>Number of Drivers</Typography>
 
                         <Input style={styles.input}
-
+                            value="3"
+                            disabled
                         />
                     </View>
 
@@ -112,7 +123,8 @@ const CreateBooking = (props) => {
                         <Typography size={17}>Freight Amount</Typography>
 
                         <Input style={styles.input}
-
+                            value="4000"
+                            disabled
                         />
                     </View>
 
@@ -120,7 +132,8 @@ const CreateBooking = (props) => {
                         <Typography size={17}>Weight of Load</Typography>
 
                         <Input style={styles.input}
-
+                            value="120 KGs"
+                            disabled
                         />
                     </View>
 
@@ -128,23 +141,20 @@ const CreateBooking = (props) => {
                         <Typography size={17}>Trip Type</Typography>
 
                         <Input style={styles.input}
-
+                            value="Round"
+                            disabled
                         />
                     </View>
+                    <View style={styles.feilds}>
+                        <Typography size={17}>Approve by</Typography>
 
+                        <Input style={styles.input}
+                            value="VHG"
+                            disabled
+                        />
+                    </View>
                 </View>
-
-                
             </Content>
-            <Footer>
-            <View style={{padding:10}}>
-                    <Button
-                        title="Submit"
-                        onPress={() => {}}
-                        style={{ marginTop: 15 }}
-                    />
-                </View>
-            </Footer>
         </Container>
     )
 }
@@ -161,4 +171,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default (CreateBooking);
+export default (BookingStatusDetil);
