@@ -174,6 +174,21 @@ const Home = (props) => {
                                 <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Booking Details</Typography>
                             </View>
                         </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => props.navigation.navigate("Transporter")}>
+                            <View style={{ width: 100 }}>
+                                <LottieAnimation
+                                    source={require('../../Asets/Loader/transporter.json')}
+                                    loop={false}
+                                    speed={1}
+                                    // ref={menref}
+                                    // onAnimationFinish={mentrigger}
+                                    autoPlay={true}
+                                    style={{ width: 100, height: 100, marginBottom: 0,  marginTop: -2 }}
+                                />
+                                <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Transporter Dashboard</Typography>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Content>
