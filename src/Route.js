@@ -18,6 +18,8 @@ import BookingStatusDetil from "./Screens/Booking/BookingStatusDetail";
 import Transporter from "./Screens/TranspDash/Transporter";
 import OrderDetail from "./Screens/TranspDash/OrderDetail";
 import PendingOrder from "./Screens/TranspDash/PendingOrder";
+import AddTruck from "./Screens/AddDetail/AddTruck";
+import AddDriver from "./Screens/AddDetail/AddDriver";
 
 
 
@@ -47,6 +49,9 @@ const Route = (props) => {
                 <Stack.Screen name="Transporter" component={Transporter} options={{ headerShown: false }} />
                 <Stack.Screen name="OrderDetail" component={OrderDetail} options={{ headerShown: false }} />
                 <Stack.Screen name="PendingOrder" component={PendingOrder} options={{ headerShown: false }} />
+                <Stack.Screen name="AddTruck" component={AddTruck} options={{ headerShown: false }} />
+                <Stack.Screen name="AddDriver" component={AddDriver} options={{ headerShown: false }} />
+
 
 
 

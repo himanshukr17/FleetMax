@@ -184,12 +184,47 @@ const Home = (props) => {
                                     // ref={menref}
                                     // onAnimationFinish={mentrigger}
                                     autoPlay={true}
-                                    style={{ width: 100, height: 100, marginBottom: 0,  marginTop: -2 }}
+                                    style={{ width: 100, height: 100, marginBottom: 0, marginTop: -2 }}
                                 />
                                 <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Transporter Dashboard</Typography>
                             </View>
                         </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => props.navigation.navigate("AddTruck")}>
+                            <View style={{ width: 100 }}>
+                                <LottieAnimation
+                                    source={require('../../Asets/Loader/addTruck.json')}
+                                    loop={false}
+                                    speed={1}
+                                    // ref={menref}
+                                    // onAnimationFinish={mentrigger}
+                                    autoPlay={true}
+                                    style={{ width: 100, height: 100, marginBottom: 0, marginTop: -2 }}
+                                />
+                                <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Add Truck</Typography>
+                            </View>
+                        </TouchableOpacity>
                     </View>
+
+                    <View style={{ flexDirection: 'row', padding: 15, justifyContent: 'space-between', paddingRight: 20 }}>
+
+                        <TouchableOpacity onPress={() => props.navigation.navigate("AddDriver")}>
+                            <View style={{ width: 100 }}>
+                                <LottieAnimation
+                                    source={require('../../Asets/Loader/addDriver.json')}
+                                    loop={false}
+                                    speed={1}
+                                    // ref={menref}
+                                    // onAnimationFinish={mentrigger}
+                                    autoPlay={true}
+                                    style={{ width: 100, height: 100, marginBottom: 0, marginTop: -2 }}
+                                />
+                                <Typography style={{ alignSelf: 'center', textAlign: 'center' }}>Add Driver</Typography>
+                            </View>
+                        </TouchableOpacity>
+
+                    </View>
+
                 </View>
             </Content>
         </Container>
