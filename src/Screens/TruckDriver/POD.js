@@ -15,7 +15,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import DocumentPicker, { types } from 'react-native-document-picker';
 
 
-const AddDriver = (props) => {
+const POD = (props) => {
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -31,9 +31,11 @@ const AddDriver = (props) => {
             }
       }, [menloop]);
 
+
       const [doc, setdoc] = useState(null);
       const [doc1, setdoc1] = useState(null);
       const [doc2, setdoc2] = useState(null);
+      const [doc3, setdoc3] = useState(null);
 
 
       const docselection = useCallback(async () => {
@@ -75,10 +77,25 @@ const AddDriver = (props) => {
             }
       }, []);
 
+      const docselection3 = useCallback(async () => {
+            try {
+                  const response = await DocumentPicker.pick({
+                        presentationStyle: 'fullScreen',
+                        // type: [types.pdf, types.docx],
+                        allowMultiSelection: true,
+                  });
+                  setdoc3(response);
+            } catch (err) {
+                  console.warn(err);
+            }
+      }, []);
+
       useFocusEffect(useCallback(() => {
             setdoc(null)
             setdoc1(null)
             setdoc2(null)
+            setdoc3(null)
+
 
       }, []))
 
@@ -101,123 +118,27 @@ const AddDriver = (props) => {
                                           />
                                     </TouchableOpacity>
                                     <View>
-                                          <Typography type='bold' style={{ marginTop: 5, marginLeft: 7 }} size={19}>Driver Details</Typography>
+                                          <Typography type='bold' style={{ marginTop: 5, marginLeft: 7 }} size={19}>Map View</Typography>
                                     </View>
                               </View>}
                         />
                   </Header>
                   <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
                   <Content>
-                        <View style={{ marginTop: "7%", marginLeft: "3%" }}>
 
-                              <View style={styles.feilds}>
-                                    <Typography size={17}>Driver Name</Typography>
-                                    <Input style={styles.input}
+                        <View style={{marginTop:"5%"}}>
 
-                                    />
+                              <View style={{flexDirection:"row", justifyContent:"space-between"}}>
+                                    <Typography size={16} type="extraBold" style={{marginLeft:"3%"}}>Order Number</Typography>
+                                    <Typography size={16} type="extraBold" color="blue" style={{marginRight:"5%"}}>NAL0398</Typography>
+
                               </View>
 
-                              <View style={styles.feilds}>
-                                    <Typography size={17}>Base Location</Typography>
-
-                                    <Input style={styles.input}
-
-                                    />
-                              </View>
-
-                              <View style={styles.feilds}>
-                                    <Typography size={17}>License Number</Typography>
-
-                                    <Input style={styles.input}
-
-                                    />
-                              </View>
-
-                              <View style={styles.feilds}>
-                                    <Typography size={17}>License Valid Upto</Typography>
-
-                                    <Input style={styles.input}
-
-                                    />
-                              </View>
-
-                              <View style={styles.feilds}>
-                                    <Typography size={17}>Vehicles Allowed</Typography>
-
-                                    <Input style={styles.input}
-
-                                    />
-                              </View>
-
-                              <View style={styles.feilds}>
-                                    <Typography size={17}>Vehicles Type</Typography>
-
-                                    <Input style={styles.input}
-
-                                    />
-                              </View>
-
-                              <View style={{ flexDirection: "row", alignItems: "center", marginBottom: "3%" }}>
-                                    <Typography size={17} style={{ marginLeft: "3%" }}>Driver License</Typography>
-
-                                    <TouchableOpacity onPress={() => docselection2()}>
-                                          <View style={{ marginLeft: "52%", marginRight: -10 }}>
-                                                <View style={{ borderWidth: 0.5, padding: 5, borderRadius: 10, width: '100%', backgroundColor: "#dcdcdc" }}>
-
-                                                      {doc2 ? <Icon
-                                                            name={"checkbox-outline"}
-                                                            color={"green"}
-                                                            type='ionicon'
-                                                            // onPress={onpress}
-                                                            size={28}
-                                                            style={{ marginRight: "5%" }}
-                                                      /> : <Icon
-                                                            name={"cloud-upload-outline"}
-                                                            color={"black"}
-                                                            type='ionicon'
-                                                            // onPress={onpress}
-                                                            size={28}
-                                                            style={{ marginRight: "5%" }}
-                                                      />}
-                                                      {/* <Typography color='black' type="extraBold">{!doc ? "Please Attach Relevant Document" : doc[0].name}</Typography> */}
-                                                </View>
-                                          </View>
-                                    </TouchableOpacity>
-                              </View>
-
-                              <View style={{ flexDirection: "row", alignItems: "center", marginBottom: "3%" }}>
-                                    <Typography size={17} style={{ marginLeft: "3%" }}>Driver ID</Typography>
-
-                                    <TouchableOpacity onPress={() => docselection1()}>
-                                          <View style={{ marginLeft: "64%", marginRight: -30 }}>
-                                                <View style={{ borderWidth: 0.5, padding: 5, borderRadius: 10, width: '100%', backgroundColor: "#dcdcdc" }}>
-
-                                                      {doc1 ? <Icon
-                                                            name={"checkbox-outline"}
-                                                            color={"green"}
-                                                            type='ionicon'
-                                                            // onPress={onpress}
-                                                            size={28}
-                                                            style={{ marginRight: "5%" }}
-                                                      /> : <Icon
-                                                            name={"cloud-upload-outline"}
-                                                            color={"black"}
-                                                            type='ionicon'
-                                                            // onPress={onpress}
-                                                            size={28}
-                                                            style={{ marginRight: "5%" }}
-                                                      />}
-                                                      {/* <Typography color='black' type="extraBold">{!doc ? "Please Attach Relevant Document" : doc[0].name}</Typography> */}
-                                                </View>
-                                          </View>
-                                    </TouchableOpacity>
-                              </View>
-
-                              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                    <Typography size={17} style={{ marginLeft: "3%" }}>Driver Image</Typography>
+                              <View style={{ flexDirection: "row", alignItems: "center" , marginTop:"5%"}}>
+                                    <Typography size={17} style={{ marginLeft: "3%" }}>Invoice with Stamp</Typography>
 
                                     <TouchableOpacity onPress={() => docselection()}>
-                                          <View style={{ marginLeft: "55%", marginRight: -18 }}>
+                                          <View style={{ marginLeft: "40%", marginRight: -18 }}>
                                                 <View style={{ borderWidth: 0.5, padding: 5, borderRadius: 10, width: '100%', backgroundColor: "#dcdcdc" }}>
 
                                                       {doc ? <Icon
@@ -241,19 +162,106 @@ const AddDriver = (props) => {
                                     </TouchableOpacity>
                               </View>
 
+                              <View style={{ flexDirection: "row", alignItems: "center" , marginTop:"5%"}}>
+                                    <Typography size={17} style={{ marginLeft: "3%" }}>POD from Customer</Typography>
+
+                                    <TouchableOpacity onPress={() => docselection1()}>
+                                          <View style={{ marginLeft: "38%", marginRight: -18 }}>
+                                                <View style={{ borderWidth: 0.5, padding: 5, borderRadius: 10, width: '100%', backgroundColor: "#dcdcdc" }}>
+
+                                                      {doc1 ? <Icon
+                                                            name={"checkbox-outline"}
+                                                            color={"green"}
+                                                            type='ionicon'
+                                                            // onPress={onpress}
+                                                            size={28}
+                                                            style={{ marginRight: "5%" }}
+                                                      /> : <Icon
+                                                            name={"cloud-upload-outline"}
+                                                            color={"black"}
+                                                            type='ionicon'
+                                                            // onPress={onpress}
+                                                            size={28}
+                                                            style={{ marginRight: "5%" }}
+                                                      />}
+                                                      {/* <Typography color='black' type="extraBold">{!doc ? "Please Attach Relevant Document" : doc[0].name}</Typography> */}
+                                                </View>
+                                          </View>
+                                    </TouchableOpacity>
+                              </View>
+
+                              <View style={{ flexDirection: "row", alignItems: "center" , marginTop:"5%"}}>
+                                    <Typography size={17} style={{ marginLeft: "3%" }}>Signed Delivery Receipt</Typography>
+
+                                    <TouchableOpacity onPress={() => docselection2()}>
+                                          <View style={{ marginLeft: "29%", marginRight: -18 }}>
+                                                <View style={{ borderWidth: 0.5, padding: 5, borderRadius: 10, width: '105%', backgroundColor: "#dcdcdc" }}>
+
+                                                      {doc2 ? <Icon
+                                                            name={"checkbox-outline"}
+                                                            color={"green"}
+                                                            type='ionicon'
+                                                            // onPress={onpress}
+                                                            size={28}
+                                                            style={{ marginRight: "5%" }}
+                                                      /> : <Icon
+                                                            name={"cloud-upload-outline"}
+                                                            color={"black"}
+                                                            type='ionicon'
+                                                            // onPress={onpress}
+                                                            size={28}
+                                                            style={{ marginRight: "5%" }}
+                                                      />}
+                                                      {/* <Typography color='black' type="extraBold">{!doc ? "Please Attach Relevant Document" : doc[0].name}</Typography> */}
+                                                </View>
+                                          </View>
+                                    </TouchableOpacity>
+                              </View>
+
+                              <View style={{ flexDirection: "row", alignItems: "center" , marginTop:"5%"}}>
+                                    <Typography size={17} style={{ marginLeft: "3%" }}>Signed bill of loading</Typography>
+
+                                    <TouchableOpacity onPress={() => docselection3()}>
+                                          <View style={{ marginLeft: "37%", marginRight: -18 }}>
+                                                <View style={{ borderWidth: 0.5, padding: 5, borderRadius: 10, width: '100%', backgroundColor: "#dcdcdc" }}>
+
+                                                      {doc3 ? <Icon
+                                                            name={"checkbox-outline"}
+                                                            color={"green"}
+                                                            type='ionicon'
+                                                            // onPress={onpress}
+                                                            size={28}
+                                                            style={{ marginRight: "5%" }}
+                                                      /> : <Icon
+                                                            name={"cloud-upload-outline"}
+                                                            color={"black"}
+                                                            type='ionicon'
+                                                            // onPress={onpress}
+                                                            size={28}
+                                                            style={{ marginRight: "5%" }}
+                                                      />}
+                                                      {/* <Typography color='black' type="extraBold">{!doc ? "Please Attach Relevant Document" : doc[0].name}</Typography> */}
+                                                </View>
+                                          </View>
+                                    </TouchableOpacity>
+                              </View>
+
                         </View>
-
-
                   </Content>
-                  <Footer>
-                        <View style={{ padding: 10 }}>
-                              <Button
-                                    title="Submit"
-                                    onPress={() => { }}
-                                    style={{ marginTop: 15 }}
-                              />
-                        </View>
-                  </Footer>
+
+                  <View>
+                        <Footer>
+                              <View style={{ padding: 10 }}>
+                                    <Button
+                                          title="Upload to System"
+                                          onPress={() => props.navigation.navigate("Home")}
+                                          style={{ marginTop: 15 }}
+                                    />
+                              </View>
+                        </Footer>
+                  </View>
+
+
             </Container>
       )
 }
@@ -270,4 +278,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default (AddDriver);
+export default (POD);

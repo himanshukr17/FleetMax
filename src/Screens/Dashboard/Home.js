@@ -10,9 +10,8 @@ import { Icon } from 'react-native-elements';
 import LottieAnimation from 'lottie-react-native';
 import { Avatar, Divider } from 'react-native-elements';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE, Circle, Polyline } from 'react-native-maps';
+import Drawer from "../../Components/Drawer";
 
-import Button from "../../Components/CustomButton/Button";
-import LinearGradient from "react-native-linear-gradient";
 
 const Home = (props) => {
     const [menloop, setmenloop] = useState(0)
@@ -35,7 +34,7 @@ const Home = (props) => {
             <Header>
                 <Nav
                     leftComponent={<View style={{ flexDirection: 'row', width: '400%', alignItems: 'center', marginTop: '15%' }}>
-                        <TouchableOpacity onPress={() => { }}>
+                        <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
                             <LottieAnimation
                                 source={require('../../Asets/Loader/menu.json')}
                                 loop={false}

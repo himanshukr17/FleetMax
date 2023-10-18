@@ -31,6 +31,10 @@ const AddTruck = (props) => {
 
       const [data, setdata] = useState({
             "VEHTYPE": "",
+            "VEHSIZE": "",
+            "OWNER": "",
+            "FUEL": "",
+
       })
 
 
@@ -76,7 +80,7 @@ const AddTruck = (props) => {
                                     />
                               </View>
 
-                              <View style={{marginBottom:"4%"}}>
+                              <View style={{ marginBottom: "4%" }}>
                                     <DropDownPicker
                                           label={'Vehicle Type'}
                                           // style={{colour:"black"}}
@@ -94,7 +98,7 @@ const AddTruck = (props) => {
                                     />
                               </View>
 
-                              <View style={{marginBottom:"2%"}}>
+                              <View style={{ marginBottom: "2%" }}>
                                     <DropDownPicker
                                           label={'Vehicle Size'}
                                           // style={{colour:"black"}}
@@ -106,21 +110,30 @@ const AddTruck = (props) => {
                                                 // { label: 'Other', value: '4' },
 
                                           ]}
-                                          onValueChange={(item) => { setType(item), setValue({ VEHTYPE: item }) }}
-                                          value={data.VEHTYPE}
+                                          onValueChange={(item) => { setType(item), setValue({ VEHSIZE: item }) }}
+                                          value={data.VEHSIZE}
 
                                     />
                               </View>
 
-                              <View style={styles.feilds}>
-                                    <Typography size={17}>Owner</Typography>
+                              <View style={{ marginBottom: "2%" }}>
+                                    <DropDownPicker
+                                          label={'Owner'}
+                                          // style={{colour:"black"}}
+                                          items={[
+                                                { label: 'Owner 1', value: '0' },
+                                                { label: 'Owner 2', value: '1' },
+                                                { label: 'Owner 3', value: '2' },
+                                                { label: 'Owner 4', value: '3' },
 
-                                    <Input style={styles.input}
+                                          ]}
+                                          onValueChange={(item) => { setType(item), setValue({ OWNER: item }) }}
+                                          value={data.OWNER}
 
                                     />
                               </View>
 
-                              <View style={{marginBottom:"2%"}}>
+                              <View style={{ marginBottom: "2%" }}>
                                     <DropDownPicker
                                           label={'Fuel Type'}
                                           // style={{colour:"black"}}
@@ -131,8 +144,8 @@ const AddTruck = (props) => {
                                                 { label: 'Electric', value: '3' },
 
                                           ]}
-                                          onValueChange={(item) => { setType(item), setValue({ VEHTYPE: item }) }}
-                                          value={data.VEHTYPE}
+                                          onValueChange={(item) => { setType(item), setValue({ FUEL: item }) }}
+                                          value={data.FUEL}
 
                                     />
                               </View>
