@@ -11,9 +11,11 @@ import LottieAnimation from 'lottie-react-native';
 import { Avatar, Divider, Overlay } from 'react-native-elements';
 import Button from "../../Components/CustomButton/Button";
 import DropDownPicker from '../../Components/Dropdown/Dropdown'
+import Snackbar from 'react-native-snackbar';
+import { AddTruck } from "../../redux/actions/AddTruck";
+import { connect } from "react-redux";
 
-
-const AddTruck = (props) => {
+const TruckSetails = (props) => {
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -30,22 +32,94 @@ const AddTruck = (props) => {
       }, [menloop]);
 
       const [data, setdata] = useState({
-            "VEHTYPE": "",
-            "VEHSIZE": "",
+            "VEHICLE_NO": "",
+            "VEHICLE_TYPE": "",
+            "VEHICLE_SIZE": "",
             "OWNER": "",
-            "FUEL": "",
+            "FUEL_TYPE": "",
+            "LENGTH": "",
+            "WIDTH": "",
+            "HEIGHT": "",
+            "APPROVED_LOAD_CAPACITY": "",
+            "RC_NO": "",
+            "RC_VALID_TO": "",
+            "INSURANCE_STATUS": "",
+            "INSURANCE_VALID_TO": "",
+            "PERMIT_NO": "",
+            "PERMIT_EXPIRY": "",
 
       })
 
+      const [error, seterror] = useState({
+      })
 
       const setValue = (val) => {
             setdata({ ...data, ...val })
       }
 
-
       const [type, setType] = useState(null)
 
+      const handleSubmit = () => {
+            let hasErr = false
+            let require = ["VEHICLE_NO", "VEHICLE_TYPE", "VEHICLE_SIZE", "OWNER", "FUEL_TYPE", "LENGTH", "WIDTH", "HEIGHT", "APPROVED_LOAD_CAPACITY", "RC_NO", "RC_VALID_TO", "INSURANCE_STATUS", "INSURANCE_VALID_TO", "PERMIT_NO", "PERMIT_EXPIRY"]
+            let err = {
+                  VEHICLE_NO: "",
+                  VEHICLE_TYPE: "",
+                  VEHICLE_SIZE: "",
+                  OWNER: "",
+                  FUEL_TYPE: "",
+                  LENGTH: "",
+                  WIDTH: "",
+                  HEIGHT: "",
+                  APPROVED_LOAD_CAPACITY: "",
+                  RC_NO: "",
+                  RC_VALID_TO: "",
+                  INSURANCE_STATUS: "",
+                  INSURANCE_VALID_TO: "",
+                  PERMIT_NO: "",
+                  PERMIT_EXPIRY: "",
 
+            }
+            require.map((items) => {
+                  if (data[items] == "" || data[items] == '' || data[items] == null) {
+                        hasErr = true
+                        err[items] = "This field is mandatory"
+                  }
+            })
+            if(hasErr){
+                  setTimeout(() => {
+
+                        Snackbar.show({
+                            text: 'Please fill all the feilds',
+                            duration: Snackbar.LENGTH_SHORT,
+                        })
+                    }, 1000)
+            }
+            seterror(err)
+
+            if (!hasErr) {
+                  // props.Shipment(sendata).then
+                  // props.navigation.navigate("Home")
+
+                  props.AddTruck({Truck_Master:[{...data}]}).then((res) => {
+                        if (res = "success") {
+                              props.navigation.navigate("Home"),
+                                    setTimeout(() => {
+                                          Snackbar.show({
+                                                text: 'Truck added sucessfully',
+                                                duration: Snackbar.LENGTH_SHORT,
+                                          })
+                                    }, 1000)
+                        }
+                  }
+                  ).catch(err => {
+                        Snackbar.show({
+                              text: 'Unable to add truck, Please Try again!',
+                              duration: Snackbar.LENGTH_SHORT,
+                        })
+                  })
+            }
+      }
 
       return (
             <Container>
@@ -71,12 +145,15 @@ const AddTruck = (props) => {
                   </Header>
                   <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
                   <Content>
-                        <View style={{ marginTop: "7%", marginLeft: "3%" }}>
+                        <View style={{ marginTop: "2%", marginLeft: "3%", marginBottom: "20%" }}>
 
                               <View style={styles.feilds}>
                                     <Typography size={17}>Vehicle Number</Typography>
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ VEHICLE_NO: text }), seterror({ ...error, ...{ VEHICLE_NO: '' } }) }}
+                                          value={data.VEHICLE_NO}
+                                          // error={error?.VEHICLE_NO==""?true:false}
+                                          // errorMessage={"error.VEHICLE_NO"}
                                     />
                               </View>
 
@@ -92,9 +169,9 @@ const AddTruck = (props) => {
                                                 { label: 'Other', value: '4' },
 
                                           ]}
-                                          onValueChange={(item) => { setType(item), setValue({ VEHTYPE: item }) }}
-                                          value={data.VEHTYPE}
-
+                                          onValueChange={(item) => { setType(item), setValue({ VEHICLE_TYPE: item }) }}
+                                          value={data.VEHICLE_TYPE}
+                                          // errorMessage={error.VEHICLE_TYPE}
                                     />
                               </View>
 
@@ -110,9 +187,9 @@ const AddTruck = (props) => {
                                                 // { label: 'Other', value: '4' },
 
                                           ]}
-                                          onValueChange={(item) => { setType(item), setValue({ VEHSIZE: item }) }}
-                                          value={data.VEHSIZE}
-
+                                          onValueChange={(item) => { setType(item), setValue({ VEHICLE_SIZE: item }) }}
+                                          value={data.VEHICLE_SIZE}
+                                          // errorMessage={error.VEHICLE_SIZE}
                                     />
                               </View>
 
@@ -129,7 +206,7 @@ const AddTruck = (props) => {
                                           ]}
                                           onValueChange={(item) => { setType(item), setValue({ OWNER: item }) }}
                                           value={data.OWNER}
-
+                                          // errorMessage={error.OWNER}
                                     />
                               </View>
 
@@ -144,9 +221,9 @@ const AddTruck = (props) => {
                                                 { label: 'Electric', value: '3' },
 
                                           ]}
-                                          onValueChange={(item) => { setType(item), setValue({ FUEL: item }) }}
-                                          value={data.FUEL}
-
+                                          onValueChange={(item) => { setType(item), setValue({ FUEL_TYPE: item }) }}
+                                          value={data.FUEL_TYPE}
+                                          // errorMessage={error.FUEL_TYPE}
                                     />
                               </View>
 
@@ -154,7 +231,9 @@ const AddTruck = (props) => {
                                     <Typography size={17}>Length</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ LENGTH: text }), seterror({ ...error, ...{ LENGTH: '' } }) }}
+                                          value={data.LENGTH}
+                                          // errorMessage={error.LENGTH}
                                     />
                               </View>
 
@@ -162,7 +241,9 @@ const AddTruck = (props) => {
                                     <Typography size={17}>Width</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ WIDTH: text }), seterror({ ...error, ...{ WIDTH: '' } }) }}
+                                          value={data.WIDTH}
+                                          // errorMessage={error.WIDTH}
                                     />
                               </View>
 
@@ -170,7 +251,9 @@ const AddTruck = (props) => {
                                     <Typography size={17}>Height</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ HEIGHT: text }), seterror({ ...error, ...{ HEIGHT: '' } }) }}
+                                          value={data.HEIGHT}
+                                          // errorMessage={error.HEIGHT}
                                     />
                               </View>
 
@@ -182,7 +265,9 @@ const AddTruck = (props) => {
                                     </View>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ APPROVED_LOAD_CAPACITY: text }), seterror({ ...error, ...{ APPROVED_LOAD_CAPACITY: '' } }) }}
+                                          value={data.APPROVED_LOAD_CAPACITY}
+                                          // errorMessage={error.APPROVED_LOAD_CAPACITY}
                                     />
                               </View>
 
@@ -190,7 +275,9 @@ const AddTruck = (props) => {
                                     <Typography size={17}>RC Number</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ RC_NO: text }), seterror({ ...error, ...{ RC_NO: '' } }) }}
+                                          value={data.RC_NO}
+                                          // errorMessage={error.RC_NO}
                                     />
                               </View>
 
@@ -198,7 +285,9 @@ const AddTruck = (props) => {
                                     <Typography size={17}>RC Upto</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ RC_VALID_TO: text }), seterror({ ...error, ...{ RC_VALID_TO: '' } }) }}
+                                          value={data.RC_VALID_TO}
+                                          // errorMessage={error.RC_VALID_TO}
                                     />
                               </View>
 
@@ -206,7 +295,9 @@ const AddTruck = (props) => {
                                     <Typography size={17}>Insurance Statuc</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ INSURANCE_STATUS: text }), seterror({ ...error, ...{ INSURANCE_STATUS: '' } }) }}
+                                          value={data.INSURANCE_STATUS}
+                                          // errorMessage={error.INSURANCE_STATUS}
                                     />
                               </View>
 
@@ -214,15 +305,19 @@ const AddTruck = (props) => {
                                     <Typography size={17}>Insurance Upto</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ INSURANCE_VALID_TO: text }), seterror({ ...error, ...{ INSURANCE_VALID_TO: '' } }) }}
+                                          value={data.INSURANCE_VALID_TO}
+                                          // errorMessage={error.INSURANCE_VALID_TO}
                                     />
                               </View>
 
                               <View style={styles.feilds}>
-                                    <Typography size={17}>Permit (State)</Typography>
+                                    <Typography size={17}>Permit Number</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ PERMIT_NO: text }), seterror({ ...error, ...{ PERMIT_NO: '' } }) }}
+                                          value={data.PERMIT_NO}
+                                          // errorMessage={error.PERMIT_NO}
                                     />
                               </View>
 
@@ -230,9 +325,12 @@ const AddTruck = (props) => {
                                     <Typography size={17}>Permit Expiry</Typography>
 
                                     <Input style={styles.input}
-
+                                          onChangeText={(text) => { setValue({ PERMIT_EXPIRY: text }), seterror({ ...error, ...{ PERMIT_EXPIRY: '' } }) }}
+                                          value={data.PERMIT_EXPIRY}
+                                          // errorMessage={error.PERMIT_EXPIRY}
                                     />
                               </View>
+
 
                         </View>
 
@@ -242,7 +340,7 @@ const AddTruck = (props) => {
                         <View style={{ padding: 10 }}>
                               <Button
                                     title="Submit"
-                                    onPress={() => { }}
+                                    onPress={() => handleSubmit()}
                                     style={{ marginTop: 15 }}
                               />
                         </View>
@@ -263,4 +361,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default (AddTruck);
+export default connect(null,{AddTruck})(TruckSetails);
