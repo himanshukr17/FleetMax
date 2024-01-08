@@ -145,13 +145,13 @@ console.log(data)
 
                   props.AddTruck({ Truck_Master: [{ ...data,CREATED_BY:"HIMANSHU",CREATED_ON:new Date() }] }).then((res) => {
                         if (res = "success") {
-                              props.navigation.navigate("Home"),
-                                    setTimeout(() => {
-                                          Snackbar.show({
-                                                text: 'Truck added sucessfully',
-                                                duration: Snackbar.LENGTH_SHORT,
-                                          })
-                                    }, 1000)
+                              setTimeout(() => {
+                                    Snackbar.show({
+                                          text: 'Truck added sucessfully',
+                                          duration: Snackbar.LENGTH_SHORT,
+                                    })
+                              }, 1000)
+                              props.navigation.navigate("Home")
                         }
                   }
                   ).catch(err => {
