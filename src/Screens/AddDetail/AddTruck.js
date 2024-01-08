@@ -51,7 +51,23 @@ const TruckSetails = (props) => {
                   setDate(new Date())
                   setDate1(new Date())
                   setDate2(new Date())
-
+                  setdata({
+                        "VEHICLE_NO": "",
+                        "VEHICLE_TYPE": "",
+                        "VEHICLE_SIZE": "",
+                        "OWNER": "",
+                        "FUEL_TYPE": "",
+                        "LENGTH": "",
+                        "WIDTH": "",
+                        "HEIGHT": "",
+                        "APPROVED_LOAD_CAPACITY": "",
+                        "RC_NO": "",
+                        "RC_VALID_TO": "",
+                        "INSURANCE_STATUS": "",
+                        "INSURANCE_VALID_TO": "",
+                        "PERMIT_NO": "",
+                        "PERMIT_EXPIRY": "",
+                  })
 
 
             }, [])
@@ -75,7 +91,7 @@ const TruckSetails = (props) => {
             "PERMIT_EXPIRY": "",
 
       })
-
+console.log(data)
       const [error, seterror] = useState({
       })
 
@@ -127,7 +143,7 @@ const TruckSetails = (props) => {
                   // props.Shipment(sendata).then
                   // props.navigation.navigate("Home")
 
-                  props.AddTruck({ Truck_Master: [{ ...data }] }).then((res) => {
+                  props.AddTruck({ Truck_Master: [{ ...data,CREATED_BY:"HIMANSHU",CREATED_ON:new Date() }] }).then((res) => {
                         if (res = "success") {
                               props.navigation.navigate("Home"),
                                     setTimeout(() => {
@@ -319,7 +335,7 @@ const TruckSetails = (props) => {
                                           onChange={(e, val) => {
                                                 setShowPicker(false);
 
-                                                val && setDate(val);
+                                                val && setValue({ RC_VALID_TO: val });
                                           }}
                                           display="default"
                                     />)}
@@ -344,7 +360,7 @@ const TruckSetails = (props) => {
                                           </View>
 
                                           <View style={{ alignItems: 'flex-end', justifyContent: 'center', alignContent: 'flex-end', marginRight: "5%" }}>
-                                                <Typography>{date.toDateString()}</Typography>
+                                                <Typography>{data.RC_VALID_TO?new Date(data.RC_VALID_TO).toDateString():""}</Typography>
                                           </View>
                                     </View>
                               </TouchableOpacity>
@@ -381,7 +397,7 @@ const TruckSetails = (props) => {
                                           onChange={(e, val) => {
                                                 setShowPicker1(false);
 
-                                                val && setDate1(val);
+                                                val && setValue({ INSURANCE_VALID_TO: val });
                                           }}
                                           display="default"
                                     />)}
@@ -406,7 +422,7 @@ const TruckSetails = (props) => {
                                           </View>
 
                                           <View style={{ alignItems: 'flex-end', justifyContent: 'center', alignContent: 'flex-end', marginRight: "5%" }}>
-                                                <Typography>{date1.toDateString()}</Typography>
+                                                <Typography>{data.INSURANCE_VALID_TO?new Date(data.INSURANCE_VALID_TO).toDateString():""}</Typography>
                                           </View>
                                     </View>
                               </TouchableOpacity>
@@ -443,7 +459,7 @@ const TruckSetails = (props) => {
                                           onChange={(e, val) => {
                                                 setShowPicker2(false);
 
-                                                val && setDate2(val);
+                                                val && setValue({ PERMIT_EXPIRY: val });
                                           }}
                                           display="default"
                                     />)}
@@ -468,7 +484,7 @@ const TruckSetails = (props) => {
                                           </View>
 
                                           <View style={{ alignItems: 'flex-end', justifyContent: 'center', alignContent: 'flex-end', marginRight: "5%" }}>
-                                                <Typography>{date2.toDateString()}</Typography>
+                                                <Typography>{data.PERMIT_EXPIRY?new Date(data.PERMIT_EXPIRY).toDateString():""}</Typography>
                                           </View>
                                     </View>
                               </TouchableOpacity>

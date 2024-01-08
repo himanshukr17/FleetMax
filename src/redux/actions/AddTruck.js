@@ -10,7 +10,7 @@ export const AddTruck = (data) => async (dispatch, getState) => {
                   , {
                         headers: {
                               'Authorization': 'Basic c2ItNzA5ZDc4MWEtMGMwYy00Njc5LTllNjEtMGYxYTg4ZWJiOTRiIWIxMjIwfGl0LXJ0LW5lYy1kZXYtMi1rNWl6emU3OCFiMTQ4OmQwMmFkNGQ4LTJjZTgtNDdlZC05YmNjLTRlYWZjNWVlMzRiMSRsV0lSV09BbmVlRjRqZkhPNnNyZUdOX1ZoaGEyQ1g2alZXS1hqLTA1ay0wPQ==',
-                              'Content-Type': 'text/plain',
+                              'Content-Type': 'application/json',
                               'Cookie': 'SAP_SESSIONID_HDA_220=0_8PSy_cEOosyNwF7TNIK-WB19PRGRHtqa4AUFalBrA%3d; sap-usercontext=sap-client=220'
                         }
                   }
