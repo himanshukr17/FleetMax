@@ -4,7 +4,8 @@ module.exports = {
 
       delivery: 'Delivery_Tracking',
       fleetmax:'FASTAG01_to_ULIP',
-      addTruck:'TruckMaster'
+      addTruck:'TruckMaster',
+      addDriver:'Fleetmax/DriverMaster'
 
 }
 

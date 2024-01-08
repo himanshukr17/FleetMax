@@ -13,9 +13,16 @@ import Button from "../../Components/CustomButton/Button";
 import { Icon } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
 import DocumentPicker, { types } from 'react-native-document-picker';
+import Snackbar from 'react-native-snackbar';
+import { AddDriver } from "../../redux/actions/AddDriver";
+import { connect } from "react-redux";
+import DateTimePicker from '@react-native-community/datetimepicker';
+// import Icon from 'react-native-vector-icons/Ionicons';
 
+const AddTruckDriver = (props) => {
 
-const AddDriver = (props) => {
+      const [showPicker, setShowPicker] = useState(false);
+      const [date, setDate] = useState(new Date());
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -79,9 +86,81 @@ const AddDriver = (props) => {
             setdoc(null)
             setdoc1(null)
             setdoc2(null)
+            setDate(new Date())
+
 
       }, []))
 
+      const [data, setdata] = useState({
+            "DRIVER_NAME": "",
+            "BASE_LOCATION": "",
+            "LICENSE_NO": "",
+            "VALID_TO": "",
+            "VEHICLE_ALLOWED": "",
+            "VEHICLE_TYPE": "",
+
+      })
+
+      const [error, seterror] = useState({
+      })
+
+      const setValue = (val) => {
+            setdata({ ...data, ...val })
+      }
+
+      const [type, setType] = useState(null)
+
+      const handleSubmit = () => {
+            let hasErr = false
+            let require = ["DRIVER_NAME", "BASE_LOCATION", "LICENSE_NO", "VALID_TO", "VEHICLE_ALLOWED", "VEHICLE_TYPE"]
+            let err = {
+                  DRIVER_NAME: "",
+                  BASE_LOCATION: "",
+                  LICENSE_NO: "",
+                  VALID_TO: "",
+                  VEHICLE_ALLOWED: "",
+                  VEHICLE_TYPE: "",
+            }
+            require.map((items) => {
+                  if (data[items] == "" || data[items] == '' || data[items] == null) {
+                        hasErr = true
+                        err[items] = "This field is mandatory"
+                  }
+            })
+            if (hasErr) {
+                  setTimeout(() => {
+
+                        Snackbar.show({
+                              text: 'Please fill all the feilds',
+                              duration: Snackbar.LENGTH_SHORT,
+                        })
+                  }, 1000)
+            }
+            seterror(err)
+
+            if (!hasErr) {
+                  // props.Shipment(sendata).then
+                  // props.navigation.navigate("Home")
+
+                  props.AddDriver({ driver_master: [{ ...data }] }).then((res) => {
+                        if (res = "success") {
+                              props.navigation.navigate("Home"),
+                                    setTimeout(() => {
+                                          Snackbar.show({
+                                                text: 'Truck added sucessfully',
+                                                duration: Snackbar.LENGTH_SHORT,
+                                          })
+                                    }, 1000)
+                        }
+                  }
+                  ).catch(err => {
+                        Snackbar.show({
+                              text: 'Unable to add truck, Please Try again!',
+                              duration: Snackbar.LENGTH_SHORT,
+                        })
+                  })
+            }
+      }
 
 
       return (
@@ -133,13 +212,56 @@ const AddDriver = (props) => {
                                     />
                               </View>
 
-                              <View style={styles.feilds}>
+
+                              {showPicker && (
+                                    <DateTimePicker
+                                          testID="dateTimePicker"
+                                          value={date}
+                                          open={true}
+                                          // minimumDate={new Date(moment(data.START_DATE))}
+                                          // maximumDate={new Date()+30}
+                                          mode={'date'}
+                                          onChange={(e, val) => {
+                                                setShowPicker(false);
+
+                                                val && setDate(val);
+                                          }}
+                                          display="default"
+                                    />)}
+
+                              <TouchableOpacity onPress={() => setShowPicker(true)}>
+
+                                    <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                                          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+
+                                                <View style={{ flexDirection: 'row' }}>
+                                                      <View style={{ marginLeft: 8 }}>
+                                                            <Typography size={18}>License Validd Upto </Typography>
+                                                      </View>
+
+                                                </View>
+                                                <Icon
+                                                      name={"calendar"}
+                                                      type={"ionicon"}
+                                                      style={{ marginTop: "2%", marginLeft: "5%" }}
+                                                      size={20}
+                                                />
+                                          </View>
+
+                                          <View style={{ alignItems: 'flex-end', justifyContent: 'center', alignContent: 'flex-end', marginRight: "5%" }}>
+                                                <Typography>{date.toDateString()}</Typography>
+                                          </View>
+                                    </View>
+                              </TouchableOpacity>
+
+
+                              {/* <View style={styles.feilds}>
                                     <Typography size={17}>License Valid Upto</Typography>
 
                                     <Input style={styles.input}
 
                                     />
-                              </View>
+                              </View> */}
 
                               <View style={styles.feilds}>
                                     <Typography size={17}>Vehicles Allowed</Typography>
@@ -249,7 +371,7 @@ const AddDriver = (props) => {
                         <View style={{ padding: 10 }}>
                               <Button
                                     title="Submit"
-                                    onPress={() => { }}
+                                    onPress={() => handleSubmit()}
                                     style={{ marginTop: 15 }}
                               />
                         </View>
@@ -270,4 +392,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default (AddDriver);
+export default connect(null, { AddDriver })(AddTruckDriver);

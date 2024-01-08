@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import Nav from "../../Components/Header/Nav";
 import { useFocusEffect } from '@react-navigation/native';
-
 import Container from "../../Components/Layout/Conatiner";
 import Content from "../../Components/Layout/Content";
 import Header from "../../Components/Layout/Header";
