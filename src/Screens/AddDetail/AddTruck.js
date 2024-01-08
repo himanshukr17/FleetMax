@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import Nav from "../../Components/Header/Nav";
+import { useFocusEffect } from '@react-navigation/native';
+
 import Container from "../../Components/Layout/Conatiner";
 import Content from "../../Components/Layout/Content";
 import Header from "../../Components/Layout/Header";
@@ -14,8 +16,22 @@ import DropDownPicker from '../../Components/Dropdown/Dropdown'
 import Snackbar from 'react-native-snackbar';
 import { AddTruck } from "../../redux/actions/AddTruck";
 import { connect } from "react-redux";
+import DateTimePicker from '@react-native-community/datetimepicker';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+
 
 const TruckSetails = (props) => {
+
+      const [showPicker, setShowPicker] = useState(false);
+      const [showPicker1, setShowPicker1] = useState(false);
+      const [showPicker2, setShowPicker2] = useState(false);
+
+
+      const [date, setDate] = useState(new Date());
+      const [date1, setDate1] = useState(new Date());
+      const [date2, setDate2] = useState(new Date());
+
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -30,6 +46,17 @@ const TruckSetails = (props) => {
                   menref.current?.play();
             }
       }, [menloop]);
+
+      useFocusEffect(
+            useCallback(() => {
+                  setDate(new Date())
+                  setDate1(new Date())
+                  setDate2(new Date())
+
+
+
+            }, [])
+      )
 
       const [data, setdata] = useState({
             "VEHICLE_NO": "",
@@ -86,14 +113,14 @@ const TruckSetails = (props) => {
                         err[items] = "This field is mandatory"
                   }
             })
-            if(hasErr){
+            if (hasErr) {
                   setTimeout(() => {
 
                         Snackbar.show({
-                            text: 'Please fill all the feilds',
-                            duration: Snackbar.LENGTH_SHORT,
+                              text: 'Please fill all the feilds',
+                              duration: Snackbar.LENGTH_SHORT,
                         })
-                    }, 1000)
+                  }, 1000)
             }
             seterror(err)
 
@@ -101,7 +128,7 @@ const TruckSetails = (props) => {
                   // props.Shipment(sendata).then
                   // props.navigation.navigate("Home")
 
-                  props.AddTruck({Truck_Master:[{...data}]}).then((res) => {
+                  props.AddTruck({ Truck_Master: [{ ...data }] }).then((res) => {
                         if (res = "success") {
                               props.navigation.navigate("Home"),
                                     setTimeout(() => {
@@ -152,8 +179,8 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ VEHICLE_NO: text }), seterror({ ...error, ...{ VEHICLE_NO: '' } }) }}
                                           value={data.VEHICLE_NO}
-                                          // error={error?.VEHICLE_NO==""?true:false}
-                                          // errorMessage={"error.VEHICLE_NO"}
+                                    // error={error?.VEHICLE_NO==""?true:false}
+                                    // errorMessage={"error.VEHICLE_NO"}
                                     />
                               </View>
 
@@ -171,7 +198,7 @@ const TruckSetails = (props) => {
                                           ]}
                                           onValueChange={(item) => { setType(item), setValue({ VEHICLE_TYPE: item }) }}
                                           value={data.VEHICLE_TYPE}
-                                          // errorMessage={error.VEHICLE_TYPE}
+                                    // errorMessage={error.VEHICLE_TYPE}
                                     />
                               </View>
 
@@ -189,7 +216,7 @@ const TruckSetails = (props) => {
                                           ]}
                                           onValueChange={(item) => { setType(item), setValue({ VEHICLE_SIZE: item }) }}
                                           value={data.VEHICLE_SIZE}
-                                          // errorMessage={error.VEHICLE_SIZE}
+                                    // errorMessage={error.VEHICLE_SIZE}
                                     />
                               </View>
 
@@ -206,7 +233,7 @@ const TruckSetails = (props) => {
                                           ]}
                                           onValueChange={(item) => { setType(item), setValue({ OWNER: item }) }}
                                           value={data.OWNER}
-                                          // errorMessage={error.OWNER}
+                                    // errorMessage={error.OWNER}
                                     />
                               </View>
 
@@ -223,7 +250,7 @@ const TruckSetails = (props) => {
                                           ]}
                                           onValueChange={(item) => { setType(item), setValue({ FUEL_TYPE: item }) }}
                                           value={data.FUEL_TYPE}
-                                          // errorMessage={error.FUEL_TYPE}
+                                    // errorMessage={error.FUEL_TYPE}
                                     />
                               </View>
 
@@ -233,7 +260,7 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ LENGTH: text }), seterror({ ...error, ...{ LENGTH: '' } }) }}
                                           value={data.LENGTH}
-                                          // errorMessage={error.LENGTH}
+                                    // errorMessage={error.LENGTH}
                                     />
                               </View>
 
@@ -243,7 +270,7 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ WIDTH: text }), seterror({ ...error, ...{ WIDTH: '' } }) }}
                                           value={data.WIDTH}
-                                          // errorMessage={error.WIDTH}
+                                    // errorMessage={error.WIDTH}
                                     />
                               </View>
 
@@ -253,7 +280,7 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ HEIGHT: text }), seterror({ ...error, ...{ HEIGHT: '' } }) }}
                                           value={data.HEIGHT}
-                                          // errorMessage={error.HEIGHT}
+                                    // errorMessage={error.HEIGHT}
                                     />
                               </View>
 
@@ -267,7 +294,7 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ APPROVED_LOAD_CAPACITY: text }), seterror({ ...error, ...{ APPROVED_LOAD_CAPACITY: '' } }) }}
                                           value={data.APPROVED_LOAD_CAPACITY}
-                                          // errorMessage={error.APPROVED_LOAD_CAPACITY}
+                                    // errorMessage={error.APPROVED_LOAD_CAPACITY}
                                     />
                               </View>
 
@@ -277,19 +304,61 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ RC_NO: text }), seterror({ ...error, ...{ RC_NO: '' } }) }}
                                           value={data.RC_NO}
-                                          // errorMessage={error.RC_NO}
+                                    // errorMessage={error.RC_NO}
                                     />
                               </View>
 
-                              <View style={styles.feilds}>
+
+                              {showPicker && (
+                                    <DateTimePicker
+                                          testID="dateTimePicker"
+                                          value={date}
+                                          open={true}
+                                          // minimumDate={new Date(moment(data.START_DATE))}
+                                          // maximumDate={new Date()+30}
+                                          mode={'date'}
+                                          onChange={(e, val) => {
+                                                setShowPicker(false);
+
+                                                val && setDate(val);
+                                          }}
+                                          display="default"
+                                    />)}
+
+                              <TouchableOpacity onPress={() => setShowPicker(true)}>
+
+                                    <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                                          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+
+                                                <View style={{ flexDirection: 'row' }}>
+                                                      <View style={{ marginLeft: 8 }}>
+                                                            <Typography size={18}>RC Valid Upto </Typography>
+                                                      </View>
+
+                                                </View>
+                                                <Icon
+                                                      name={"calendar"}
+                                                      type={"ionicon"}
+                                                      style={{ marginTop: "2%", marginLeft: "5%" }}
+                                                      size={20}
+                                                />
+                                          </View>
+
+                                          <View style={{ alignItems: 'flex-end', justifyContent: 'center', alignContent: 'flex-end', marginRight: "5%" }}>
+                                                <Typography>{date.toDateString()}</Typography>
+                                          </View>
+                                    </View>
+                              </TouchableOpacity>
+
+                              {/* <View style={styles.feilds}>
                                     <Typography size={17}>RC Upto</Typography>
 
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ RC_VALID_TO: text }), seterror({ ...error, ...{ RC_VALID_TO: '' } }) }}
                                           value={data.RC_VALID_TO}
-                                          // errorMessage={error.RC_VALID_TO}
+                                    // errorMessage={error.RC_VALID_TO}
                                     />
-                              </View>
+                              </View> */}
 
                               <View style={styles.feilds}>
                                     <Typography size={17}>Insurance Statuc</Typography>
@@ -297,19 +366,61 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ INSURANCE_STATUS: text }), seterror({ ...error, ...{ INSURANCE_STATUS: '' } }) }}
                                           value={data.INSURANCE_STATUS}
-                                          // errorMessage={error.INSURANCE_STATUS}
+                                    // errorMessage={error.INSURANCE_STATUS}
                                     />
                               </View>
 
-                              <View style={styles.feilds}>
+
+                              {showPicker1 && (
+                                    <DateTimePicker
+                                          testID="dateTimePicker"
+                                          value={date1}
+                                          open={true}
+                                          // minimumDate={new Date(moment(data.START_DATE))}
+                                          // maximumDate={new Date()+30}
+                                          mode={'date'}
+                                          onChange={(e, val) => {
+                                                setShowPicker1(false);
+
+                                                val && setDate1(val);
+                                          }}
+                                          display="default"
+                                    />)}
+
+                              <TouchableOpacity onPress={() => setShowPicker1(true)}>
+
+                                    <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                                          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+
+                                                <View style={{ flexDirection: 'row' }}>
+                                                      <View style={{ marginLeft: 8 }}>
+                                                            <Typography size={18}>Insurance Upto </Typography>
+                                                      </View>
+
+                                                </View>
+                                                <Icon
+                                                      name={"calendar"}
+                                                      type={"ionicon"}
+                                                      style={{ marginTop: "2%", marginLeft: "5%" }}
+                                                      size={20}
+                                                />
+                                          </View>
+
+                                          <View style={{ alignItems: 'flex-end', justifyContent: 'center', alignContent: 'flex-end', marginRight: "5%" }}>
+                                                <Typography>{date1.toDateString()}</Typography>
+                                          </View>
+                                    </View>
+                              </TouchableOpacity>
+
+                              {/* <View style={styles.feilds}>
                                     <Typography size={17}>Insurance Upto</Typography>
 
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ INSURANCE_VALID_TO: text }), seterror({ ...error, ...{ INSURANCE_VALID_TO: '' } }) }}
                                           value={data.INSURANCE_VALID_TO}
-                                          // errorMessage={error.INSURANCE_VALID_TO}
+                                    // errorMessage={error.INSURANCE_VALID_TO}
                                     />
-                              </View>
+                              </View> */}
 
                               <View style={styles.feilds}>
                                     <Typography size={17}>Permit Number</Typography>
@@ -317,19 +428,61 @@ const TruckSetails = (props) => {
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ PERMIT_NO: text }), seterror({ ...error, ...{ PERMIT_NO: '' } }) }}
                                           value={data.PERMIT_NO}
-                                          // errorMessage={error.PERMIT_NO}
+                                    // errorMessage={error.PERMIT_NO}
                                     />
                               </View>
 
-                              <View style={styles.feilds}>
+
+                              {showPicker2 && (
+                                    <DateTimePicker
+                                          testID="dateTimePicker"
+                                          value={date2}
+                                          open={true}
+                                          // minimumDate={new Date(moment(data.START_DATE))}
+                                          // maximumDate={new Date()+30}
+                                          mode={'date'}
+                                          onChange={(e, val) => {
+                                                setShowPicker2(false);
+
+                                                val && setDate2(val);
+                                          }}
+                                          display="default"
+                                    />)}
+
+                              <TouchableOpacity onPress={() => setShowPicker2(true)}>
+
+                                    <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                                          <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+
+                                                <View style={{ flexDirection: 'row' }}>
+                                                      <View style={{ marginLeft: 8 }}>
+                                                            <Typography size={18}>Permit Expiry </Typography>
+                                                      </View>
+
+                                                </View>
+                                                <Icon
+                                                      name={"calendar"}
+                                                      type={"ionicon"}
+                                                      style={{ marginTop: "2%", marginLeft: "5%" }}
+                                                      size={20}
+                                                />
+                                          </View>
+
+                                          <View style={{ alignItems: 'flex-end', justifyContent: 'center', alignContent: 'flex-end', marginRight: "5%" }}>
+                                                <Typography>{date2.toDateString()}</Typography>
+                                          </View>
+                                    </View>
+                              </TouchableOpacity>
+
+                              {/* <View style={styles.feilds}>
                                     <Typography size={17}>Permit Expiry</Typography>
 
                                     <Input style={styles.input}
                                           onChangeText={(text) => { setValue({ PERMIT_EXPIRY: text }), seterror({ ...error, ...{ PERMIT_EXPIRY: '' } }) }}
                                           value={data.PERMIT_EXPIRY}
-                                          // errorMessage={error.PERMIT_EXPIRY}
+                                    // errorMessage={error.PERMIT_EXPIRY}
                                     />
-                              </View>
+                              </View> */}
 
 
                         </View>
@@ -361,4 +514,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default connect(null,{AddTruck})(TruckSetails);
+export default connect(null, { AddTruck })(TruckSetails);
