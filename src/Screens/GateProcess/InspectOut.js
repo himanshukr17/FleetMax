@@ -11,7 +11,9 @@ import LottieAnimation from 'lottie-react-native';
 import { Avatar, Divider, Overlay } from 'react-native-elements';
 import Button from "../../Components/CustomButton/Button";
 import DropDown from '../../Components/Dropdown/CustomDropdown'
-
+import { connect } from "react-redux";
+import Snackbar from 'react-native-snackbar';
+import { GateOut } from "../../redux/actions/GateProcess";
 
 const InspectOut = (props) => {
 
@@ -30,29 +32,56 @@ const InspectOut = (props) => {
       }, [menloop]);
 
       const [data, setdata] = useState({
-            "TEMP": "",
-            "DOCUMENT": "",
-            "ROUTE": "",
-            "FIT": "",
-            "REG": "",
-            "TIME": "",
-            "LOAD": "",
-            "FUEL": "",
-            "SEAL": "",
-            "CONDITION": "",
-            "DRIVER": "",
+            "TEMPERATURE_CONTROLE": "",
+            // "DOCUMENT": "",
+            "ROUTE_PLAN": "",
+            "DRIVER_FITNESS": "",
+            "COMPLIANCE_REGULATION": "",
+            "DISPATCH_TIME": "",
+            "LOAD_SECURED": "",
+            "FUEL_CHECK": "",
+            "SEAL_INTACT": "",
+            "VEHICLE_CONDITION": "",
+            "DRIVER_LOG": "",
             "LOAD_VERIFY": "",
-            "GEAR": "",
+            "SAFETY_GEAR": "",
+            // "COMMENTS": "",
+
 
 
       })
 
+      console.log('====================================');
+      // console.log(props.GateIn());
+      console.log("GATEOUT",data);
+      console.log('====================================');
 
       const setValue = (val) => {
             setdata({ ...data, ...val })
       }
 
       const [type, setType] = useState(null)
+
+      const handleSubmit = () => {
+
+            props.GateOut({ gate_out_inspection: [{ ...data, CREATED_BY: "HIMANSHU", CREATED_ON: new Date(), ORDER_NO: 7891029 }] }).then((res) => {
+                  if (res = "success") {
+                        setTimeout(() => {
+                              Snackbar.show({
+                                    text: 'Gate-Out Inspection added sucessfully',
+                                    duration: Snackbar.LENGTH_SHORT,
+                              })
+                        }, 1000)
+                        props.navigation.navigate("Home")
+                  }
+            }
+            ).catch(err => {
+                  Snackbar.show({
+                        text: 'Unable to add Gate-Out Inspection, Please Try again!',
+                        duration: Snackbar.LENGTH_SHORT,
+                  })
+            })
+      }
 
       return (
             <Container>
@@ -88,27 +117,27 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Exterior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ TEMP: item }) }}
-                                                value={data.TEMP}
+                                                onValueChange={(item) => { setType(item), setValue({ TEMPERATURE_CONTROLE: item }) }}
+                                                value={data.TEMPERATURE_CONTROLE}
 
                                           />
                                     </View>
 
                               </View>
 
-                              <View>
+                              {/* <View>
                                     <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Documentation</Typography>
 
                                     <View style={{ marginTop: "2%", marginLeft: "5%" }}>
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
                                                 onValueChange={(item) => { setType(item), setValue({ DOCUMENT: item }) }}
@@ -117,7 +146,7 @@ const InspectOut = (props) => {
                                           />
                                     </View>
 
-                              </View>
+                              </View> */}
 
                               <View>
                                     <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Route Plan</Typography>
@@ -126,12 +155,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ ROUTE: item }) }}
-                                                value={data.ROUTE}
+                                                onValueChange={(item) => { setType(item), setValue({ ROUTE_PLAN: item }) }}
+                                                value={data.ROUTE_PLAN}
 
                                           />
                                     </View>
@@ -144,12 +173,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ FIT: item }) }}
-                                                value={data.FIT}
+                                                onValueChange={(item) => { setType(item), setValue({ DRIVER_FITNESS: item }) }}
+                                                value={data.DRIVER_FITNESS}
 
                                           />
                                     </View>
@@ -162,12 +191,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ REG: item }) }}
-                                                value={data.REG}
+                                                onValueChange={(item) => { setType(item), setValue({ COMPLIANCE_REGULATION: item }) }}
+                                                value={data.COMPLIANCE_REGULATION}
 
                                           />
                                     </View>
@@ -180,12 +209,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ TIME: item }) }}
-                                                value={data.TIME}
+                                                onValueChange={(item) => { setType(item), setValue({ DISPATCH_TIME: item }) }}
+                                                value={data.DISPATCH_TIME}
 
                                           />
                                     </View>
@@ -198,12 +227,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ LOAD: item }) }}
-                                                value={data.LOAD}
+                                                onValueChange={(item) => { setType(item), setValue({ LOAD_SECURED: item }) }}
+                                                value={data.LOAD_SECURED}
 
                                           />
                                     </View>
@@ -216,12 +245,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ FUEL: item }) }}
-                                                value={data.FUEL}
+                                                onValueChange={(item) => { setType(item), setValue({ FUEL_CHECK: item }) }}
+                                                value={data.FUEL_CHECK}
 
                                           />
                                     </View>
@@ -234,12 +263,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ SEAL: item }) }}
-                                                value={data.SEAL}
+                                                onValueChange={(item) => { setType(item), setValue({ SEAL_INTACT: item }) }}
+                                                value={data.SEAL_INTACT}
 
                                           />
                                     </View>
@@ -252,12 +281,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ CONDITION: item }) }}
-                                                value={data.CONDITION}
+                                                onValueChange={(item) => { setType(item), setValue({ VEHICLE_CONDITION: item }) }}
+                                                value={data.VEHICLE_CONDITION}
 
                                           />
                                     </View>
@@ -270,12 +299,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ DRIVER: item }) }}
-                                                value={data.DRIVER}
+                                                onValueChange={(item) => { setType(item), setValue({ DRIVER_LOG: item }) }}
+                                                value={data.DRIVER_LOG}
 
                                           />
                                     </View>
@@ -288,12 +317,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ LOAD: item }) }}
-                                                value={data.LOAD}
+                                                onValueChange={(item) => { setType(item), setValue({ LOAD_VERIFY: item }) }}
+                                                value={data.LOAD_VERIFY}
 
                                           />
                                     </View>
@@ -306,12 +335,12 @@ const InspectOut = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ GEAR: item }) }}
-                                                value={data.GEAR}
+                                                onValueChange={(item) => { setType(item), setValue({ SAFETY_GEAR: item }) }}
+                                                value={data.SAFETY_GEAR}
 
                                           />
                                     </View>
@@ -325,7 +354,8 @@ const InspectOut = (props) => {
                               <View style={{ padding: 10 }}>
                                     <Button
                                           title="Submit"
-                                          onPress={() => props.navigation.navigate("Home")}
+                                          onPress={() => handleSubmit()}
+                                          // onPress={() => props.navigation.navigate("Home")}
                                           style={{ marginTop: 15 }}
                                     />
                               </View>
@@ -355,4 +385,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default (InspectOut);
+export default connect(null, { GateOut })(InspectOut);

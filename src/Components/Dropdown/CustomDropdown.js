@@ -11,7 +11,7 @@ export default function index(props) {
                   <View style={{ borderBottomColor: "#000000", borderBottomWidth: 0.6,backgroundColor:"#E1E1E1", width: "87%", padding:12, paddingBottom:14 }}>
                         <RNPickerSelect
                               {...props}
-                              textInputProps={{ underlineColorAndroid: 'cyan',fontColor:"black" }}
+                              // textInputProps={{ underlineColorAndroid: 'cyan',fontColor:"black" }}
                               style={{
                                     ...pickerSelectStyles,
                                     placeholder: {
@@ -42,9 +42,9 @@ const pickerSelectStyles = StyleSheet.create({
             paddingHorizontal: 10,
             paddingVertical: 8,
             borderWidth: 0.5,
-            borderColor: 'purple',
+            // borderColor: 'purple',
             borderRadius: 8,
-            color: theme.colors.textPrimary,
+            // color: theme.colors.textPrimary,
             paddingLeft: 30, // to ensure the text is never behind the icon
             paddingRight: 30, // to ensure the text is never behind the icon
       },

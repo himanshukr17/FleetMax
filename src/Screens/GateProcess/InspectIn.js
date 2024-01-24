@@ -13,6 +13,9 @@ import Button from "../../Components/CustomButton/Button";
 import DropDown from '../../Components/Dropdown/CustomDropdown'
 import { useFocusEffect } from '@react-navigation/native';
 import DropDownPicker from '../../Components/Dropdown/Dropdown'
+import { GateIn } from "../../redux/actions/GateProcess";
+import { connect } from "react-redux";
+import Snackbar from 'react-native-snackbar';
 
 
 const InspectIn = (props) => {
@@ -32,24 +35,50 @@ const InspectIn = (props) => {
       }, [menloop]);
 
       const [data, setdata] = useState({
-            "VEH_EXT": "",
-            "VEH_INT": "",
-            "ODOR": "",
-            "INT_SUR": "",
-            "PEST": "",
-            "HYG": "",
-            "DOC": "",
-            "MAINT": "",
-            "STR_INTEGRITY": "",
-            "CLEAN": "",
+            "EXTERIOR_INSPECTION": "",
+            "INTERIOR_INSPECTION": "",
+            "ODOR_INSPECTION": "",
+            "INTERIOR_SUPRFACE": "",
+            "PEST_CONTROLE_VERIFY": "",
+            "HYGIENE_MATERIAL": "",
+            "DOCUMENTATION_CHECK": "",
+            "VEHICLE_MAINTAINENCE_REPORT": "",
+            "STRUCTURAL_INTEGRITY": "",
+            "CLEANING_VALIDATION": "",
+            "COMMENTS": ""
       })
 
+      console.log('====================================');
+      // console.log(props.GateIn());
+      console.log(data);
+      console.log('====================================');
 
       const setValue = (val) => {
             setdata({ ...data, ...val })
       }
 
       const [type, setType] = useState(null)
+
+      const handleSubmit = () => {
+
+            props.GateIn({ Gate_In_Inspection: [{ ...data, CREATED_BY: "HIMANSHU", CREATED_ON: new Date(), ORDER_NO: 123456 }] }).then((res) => {
+                  if (res = "success") {
+                        setTimeout(() => {
+                              Snackbar.show({
+                                    text: 'Inspection added sucessfully',
+                                    duration: Snackbar.LENGTH_SHORT,
+                              })
+                        }, 1000)
+                        props.navigation.navigate("Home")
+                  }
+            }
+            ).catch(err => {
+                  Snackbar.show({
+                        text: 'Unable to add Inspection, Please Try again!',
+                        duration: Snackbar.LENGTH_SHORT,
+                  })
+            })
+      }
 
       return (
             <Container>
@@ -77,7 +106,7 @@ const InspectIn = (props) => {
 
                   <Content style={{ zIndex: 1 }}>
 
-                        <View style={{right:-15}}>
+                        <View style={{ right: -15 }}>
                               <View style={{ marginTop: "2%" }}>
                                     <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Visual Interior Inspection</Typography>
 
@@ -85,12 +114,12 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Exterior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ VEH_INT: item }) }}
-                                                value={data.VEH_INT}
+                                                onValueChange={(item) => { setType(item), setValue({ INTERIOR_INSPECTION: item }) }}
+                                                value={data.INTERIOR_INSPECTION}
 
                                           />
                                     </View>
@@ -104,12 +133,12 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ VEH_EXT: item }) }}
-                                                value={data.VEH_EXT}
+                                                onValueChange={(item) => { setType(item), setValue({ EXTERIOR_INSPECTION: item }) }}
+                                                value={data.EXTERIOR_INSPECTION}
 
                                           />
                                     </View>
@@ -117,18 +146,18 @@ const InspectIn = (props) => {
                               </View>
 
                               <View>
-                                    <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Odor Inspection</Typography>
+                                    <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>ODOR_INSPECTION Inspection</Typography>
 
                                     <View style={{ marginTop: "2%", marginLeft: "5%" }}>
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ ODOR: item }) }}
-                                                value={data.ODOR}
+                                                onValueChange={(item) => { setType(item), setValue({ ODOR_INSPECTION: item }) }}
+                                                value={data.ODOR_INSPECTION}
 
                                           />
                                     </View>
@@ -141,12 +170,12 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ INT_SUR: item }) }}
-                                                value={data.INT_SUR}
+                                                onValueChange={(item) => { setType(item), setValue({ INTERIOR_SUPRFACE: item }) }}
+                                                value={data.INTERIOR_SUPRFACE}
 
                                           />
                                     </View>
@@ -159,12 +188,12 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ PEST: item }) }}
-                                                value={data.PEST}
+                                                onValueChange={(item) => { setType(item), setValue({ PEST_CONTROLE_VERIFY: item }) }}
+                                                value={data.PEST_CONTROLE_VERIFY}
 
                                           />
                                     </View>
@@ -177,12 +206,12 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ HYG: item }) }}
-                                                value={data.HYG}
+                                                onValueChange={(item) => { setType(item), setValue({ HYGIENE_MATERIAL: item }) }}
+                                                value={data.HYGIENE_MATERIAL}
 
                                           />
                                     </View>
@@ -195,36 +224,36 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ DOC: item }) }}
-                                                value={data.DOC}
+                                                onValueChange={(item) => { setType(item), setValue({ DOCUMENTATION_CHECK: item }) }}
+                                                value={data.DOCUMENTATION_CHECK}
 
                                           />
                                     </View>
                               </View>
 
                               <View>
-                                    <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Vehicle Maintenance Record</Typography>
+                                    <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Vehicle Maintainence Record</Typography>
 
                                     <View style={{ marginTop: "2%", marginLeft: "5%" }}>
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ MAINT: item }) }}
-                                                value={data.MAINT}
+                                                onValueChange={(item) => { setType(item), setValue({ VEHICLE_MAINTAINENCE_REPORT: item }) }}
+                                                value={data.VEHICLE_MAINTAINENCE_REPORT}
 
                                           />
                                     </View>
                               </View>
 
-                             
+
 
                               <View>
                                     <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Structural Integrity</Typography>
@@ -233,12 +262,12 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ STR_INTEGRITY: item }) }}
-                                                value={data.STR_INTEGRITY}
+                                                onValueChange={(item) => { setType(item), setValue({ STRUCTURAL_INTEGRITY: item }) }}
+                                                value={data.STRUCTURAL_INTEGRITY}
 
                                           />
                                     </View>
@@ -251,22 +280,23 @@ const InspectIn = (props) => {
                                           <DropDown
                                                 // label={'Visual Interior Inspection'}
                                                 items={[
-                                                      { label: 'Ok', value: '0' },
-                                                      { label: 'Not Ok', value: '1' },
+                                                      { label: 'Ok', value: true },
+                                                      { label: 'Not Ok', value: false },
 
                                                 ]}
-                                                onValueChange={(item) => { setType(item), setValue({ CLEAN: item }) }}
-                                                value={data.CLEAN}
+                                                onValueChange={(item) => { setType(item), setValue({ CLEANING_VALIDATION: item }) }}
+                                                value={data.CLEANING_VALIDATION}
 
                                           />
                                     </View>
                               </View>
 
                               <View>
-                              <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Comment</Typography>
+                                    <Typography size={16} type="bold" style={{ marginTop: "4%", marginLeft: "5%" }}>Comment</Typography>
 
                                     <Input style={styles.comment}
-
+                                          onChangeText={(text) => { setValue({ COMMENTS: text }) }}
+                                          value={data.COMMENTS}
                                     />
                               </View>
                         </View>
@@ -278,7 +308,8 @@ const InspectIn = (props) => {
                               <View style={{ padding: 10 }}>
                                     <Button
                                           title="Submit"
-                                          onPress={() => props.navigation.navigate("Home")}
+                                          onPress={() => handleSubmit()}
+                                          // onPress={() => props.navigation.navigate("Home")}
                                           style={{ marginTop: 15 }}
                                     />
                               </View>
@@ -299,13 +330,13 @@ const styles = StyleSheet.create({
             width: "60%",
             height: "5%"
       },
-      comment:{
+      comment: {
             width: "83%",
             height: "18%",
-            marginLeft:"5%",
-            marginTop:"2%",
-            marginBottom:"5%"
+            marginLeft: "5%",
+            marginTop: "2%",
+            marginBottom: "5%"
       }
 })
 
-export default (InspectIn);
+export default connect(null, { GateIn })(InspectIn);
