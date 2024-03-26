@@ -28,6 +28,11 @@ import GetOrder from "./Screens/TruckDriver/GetOrder";
 import MapTruck from "./Screens/TruckDriver/MapTruck";
 import CompOrder from "./Screens/TruckDriver/CompOrder";
 import POD from "./Screens/TruckDriver/POD";
+import { FavourableRoutes } from "./redux/actions/FavourableRoute";
+import { GetbookingDetails } from "./redux/actions/GetbookingDetails";
+import { GetBookingstatus } from "./redux/actions/GetBookingstatus";
+import { Getvehicledetails } from "./redux/actions/Getvehicledetails";
+import { Getdriverdetails } from "./redux/actions/GetDriverDetails";
 
 
 
@@ -42,7 +47,15 @@ const Route = (props) => {
         LottieSplashScreen.hide()
         console.log("working")
         //    props.GetDeliveryDetails('20230303to20230310')
+        props.FavourableRoutes();
+        props.GetbookingDetails();
+        props.GetBookingstatus();
+        props.Getvehicledetails();
+        props.Getdriverdetails();
+        
     }, [])
+
+    
     return (
         <NavigationContainer>
             <Drawer.Navigator drawerContent={(props) => (<SideDrawer {...props} />)} headerMode={false} backBehavior='history'>
@@ -78,4 +91,11 @@ const Route = (props) => {
 
 }
 
-export default connect(null, { GetDeliveryDetails })(Route);
+// const mapStateToProps =state=>{
+//     return{
+//         favourateroute: state.favourateroute.favouriteroute,
+
+//     }
+// }
+
+export default connect( null,{ GetDeliveryDetails, FavourableRoutes, GetbookingDetails, GetBookingstatus, Getvehicledetails, Getdriverdetails })(Route);

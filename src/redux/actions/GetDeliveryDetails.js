@@ -50,7 +50,7 @@ export const GetDeliveryDetails = (data) => async (dispatch, getState) => {
           }).then((response) => {
             console.log("fastagg--->",response.status)
 
-          if (response.status == 200&&response.data?.response[0].response?.vehicle?.vehltxnList?.txn) {
+          if (response.status == 200 && response.data?.response[0].response?.vehicle?.vehltxnList?.txn) {
             // console.log(response.status)
             resolve(200)
             

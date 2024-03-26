@@ -111,7 +111,7 @@ const Home = (props) => {
                                 <Image source={require('../../Asets/Truck.png')} style={{ height: 45, width: 45, transform: [{ rotate: '-90deg' }] }} />
                             </Marker> */}
                         </MapView>
-                    </View>
+                    </View>  
                 </View>
                 <View>
                     <View style={{ flexDirection: 'row', padding: 15, justifyContent: 'space-between', paddingRight: 20 }}>

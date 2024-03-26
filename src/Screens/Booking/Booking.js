@@ -19,7 +19,17 @@ import Button from "../../Components/CustomButton/Button";
 import LinearGradient from "react-native-linear-gradient";
 import PieChart from 'react-native-pie-chart'
 import axios from "axios";
+import { connect } from "react-redux"
+import { FavourableRoutes } from "../../redux/actions/FavourableRoute";
 const Booking = (props) => {
+
+
+    let data = props.favourable
+    // const length = data.length
+    // console.log("lengthhhhhh",length)
+    // const arrlength = Array.isArray(data.Items)?data.length:0;
+    // console.log("arrrayyyyyy",arrlength )
+    console.log("favourite routeeeeeeee", data.length)
 
 
     const [menloop, setmenloop] = useState(1)
@@ -43,6 +53,9 @@ const Booking = (props) => {
     const series = [100, 98, 185] // [rejected,pending,accepted]
     const sliceColor = ['#d23a3a', '#e2eb28', '#3d961d']
     let n = [1, 2, 3]
+    console.log("arrrayyyyyyyyyyy",n.length);
+    // const p = data.length
+    // console.log("dataaaaaaaaaa",p);
     return (
         <>
             <Overlay isVisible={searchKey}>
@@ -73,13 +86,16 @@ const Booking = (props) => {
                 <Content style={{ paddingTop: 10 }}>
                     <View style={{ backgroundColor: "white", padding: 10, borderRadius: 5, borderWidth: 0.2 }}>
                         <Typography size={16} bold>Favourable Routes</Typography>
-                        {n.map(items => {
+                        {data.map((items,index) => {
                             return (
+                                          
                                 <TouchableOpacity 
-                                key={items}
+                                key={index}
                                 onPress={() => props.navigation.navigate("CreateBooking")}>
                                     <View style={styles.route}>
-                                        <Typography size={14} type={"bold"} style={{ marginBottom: 8 }}>Bangalore to Delhi</Typography>
+                                       
+                                        <Typography size={14} type={"bold"} style={{ marginBottom: 8 }}>{items.FROM_LOCATION} to {items.TO_LOCATION}</Typography>
+                         
                                         <Icon
                                             type="ionicon"
                                             size={20}
@@ -169,4 +185,10 @@ const styles = StyleSheet.create({
     }
 });
 
-export default (Booking);
+const mapStateToProps = state =>{
+    return{
+       favourable: state.favouriteroute.favouriteroute
+    }
+}
+
+export default connect(mapStateToProps,{FavourableRoutes})(Booking);

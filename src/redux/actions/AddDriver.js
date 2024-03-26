@@ -4,7 +4,7 @@ import api from '../../Utils/api'
 
 export const AddDriver = (data) => async (dispatch, getState) => {
       console.log("apiDRIVER------------->", `${api.protocol}${api.url}${api.addDriver}`, { ...data });
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {``
 
             axios.post(`${api.protocol}${api.url}${api.addDriver}`,
                   data
