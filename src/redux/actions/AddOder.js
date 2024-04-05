@@ -2,7 +2,7 @@ import axios from "axios";
 import api from '../../Utils/api'
 
 export const AddOrder = (data) => async (dispatch, getState) => {
-      console.log("ADDORDER------------->", `${api.protocol}${api.url}${api.addOrder}`, { ...data });
+      // console.log("ADDORDER------------->", `${api.protocol}${api.url}${api.addOrder}`, { ...data });
       return new Promise((resolve, reject) => {
 
             axios.post(`${api.protocol}${api.url}${api.addOrder}`,

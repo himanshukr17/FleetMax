@@ -28,11 +28,14 @@ import GetOrder from "./Screens/TruckDriver/GetOrder";
 import MapTruck from "./Screens/TruckDriver/MapTruck";
 import CompOrder from "./Screens/TruckDriver/CompOrder";
 import POD from "./Screens/TruckDriver/POD";
+import AcceptedOrder from "./Screens/TranspDash/AcceptedOrder";
+import RejectedOrder from "./Screens/TranspDash/RejectedOrder";
 import { FavourableRoutes } from "./redux/actions/FavourableRoute";
 import { GetbookingDetails } from "./redux/actions/GetbookingDetails";
 import { GetBookingstatus } from "./redux/actions/GetBookingstatus";
 import { Getvehicledetails } from "./redux/actions/Getvehicledetails";
 import { Getdriverdetails } from "./redux/actions/GetDriverDetails";
+
 
 
 
@@ -71,6 +74,8 @@ const Route = (props) => {
                 <Drawer.Screen name="Transporter" component={Transporter} options={{ headerShown: false }} />
                 <Drawer.Screen name="OrderDetail" component={OrderDetail} options={{ headerShown: false }} />
                 <Drawer.Screen name="PendingOrder" component={PendingOrder} options={{ headerShown: false }} />
+                <Drawer.Screen name="AcceptedOrder" component={AcceptedOrder} options={{ headerShown: false}} />
+                <Drawer.Screen name="RejectedOrder" component={RejectedOrder} options={{ headerShown: false}} />
                 <Drawer.Screen name="AddTruck" component={AddTruck} options={{ headerShown: false }} />
                 <Drawer.Screen name="AddDriver" component={AddDriver} options={{ headerShown: false }} />
                 <Drawer.Screen name="Gate" component={Gate} options={{ headerShown: false }} />

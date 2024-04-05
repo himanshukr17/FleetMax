@@ -2,16 +2,16 @@
 
 
 const initialState = {
-    favouriteroute:[],
+    logindata:[],
 };
  
 
 export default function (state = initialState, action ){
 
 switch (action.type) {
-  case 'FAVOURITE':
-    // console.log("redux reducerrfavvvvvvvvv",action.payload)
-    return {...state, favouriteroute: action.payload};
+  case 'LOGINDATA':
+    console.log("redux reducerloginnnnnnn",action.payload)
+    return {...state, logindata: action.payload};
 
   default:
     return state;

@@ -5,11 +5,13 @@ import getbookingdetails from './getbookingdetails';
 import getbookingstatus from './getbookingstatus';
 import getvehicledetails from './getvehicledetails';
 import getdriverdetails from './getdriverdetails';
+import loginid from './loginid';
 export default combineReducers({
     deliverydetails:deliverydetails,
     favouriteroute:favourableroute,
     bookingdetails:getbookingdetails,
     Bookingstatus:getbookingstatus,
     vehicledetails:getvehicledetails,
-    driverdetails:getdriverdetails
+    driverdetails:getdriverdetails,
+    logindata:loginid,
 });

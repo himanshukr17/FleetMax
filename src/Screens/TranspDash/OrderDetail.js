@@ -8,10 +8,17 @@ import Typography from "../../Components/typography"
 import { Icon } from 'react-native-elements';
 import LottieAnimation from 'lottie-react-native';
 import { Avatar, Divider, Overlay } from 'react-native-elements';
+import { connect } from "react-redux";
+import { GetbookingDetails } from "../../redux/actions/GetbookingDetails";
 
 
 
 const OrderDetail = (props) => {
+
+
+      let data = props.orderDetails
+      console.log("order detailsssss", data)
+      // console.log("hellooooooooooo")
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -27,6 +34,8 @@ const OrderDetail = (props) => {
             }
       }, [menloop]);
       let n = [1, 2, 3, 4, 5]
+
+      console.log("nnnnnnnnnnnnn",props.route.params);
 
       return (
             <>
@@ -57,58 +66,157 @@ const OrderDetail = (props) => {
                                     <Typography size={22} type="extraBold" color="green" style={{ textDecorationLine: 'underline', fontStyle: 'italic', marginTop: "2%" }}>Accepted Orders</Typography>
                               </View> */}
 
-                              {n.map(items => {
-                                    return (
-                                          <TouchableWithoutFeedback
+                              {data && data.map(items => {
+                                    console.log("status---------->>>>", items.STATUS)
+                                    return (<>
+                                          {items.STATUS == props.route.params ?<TouchableWithoutFeedback
                                                 key={items}
-                                                onPress={() => props.navigation.navigate("PendingOrder")}>
+                                                onPress={() => props.navigation.navigate("PendingOrder",{...items})}>
+                                                {/* { items.STATUS === "Accepted" && ( */}
                                                 <View style={styles.container}>
+
+                                                      { items.STATUS === "Pending" &&(
                                                       <View style={[styles.box, { marginRight: 10 }]}>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold >From : </Typography>
-                                                                  <Typography size={14}>Bangalore</Typography>
+                                                                  <Typography size={14}>{items.FROM_LOCATION}</Typography>
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>To : </Typography>
-                                                                  <Typography size={14}>Delhi</Typography>
+                                                                  <Typography size={14}>{items.TO_LOCATION}</Typography>
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Date : </Typography>
-                                                                  <Typography size={14}>11th Sep 2023</Typography>
+                                                                  <Typography size={14}>{items.ORDER_DATE}</Typography>
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Time : </Typography>
                                                                   <Typography size={14}>10:11 AM</Typography>
                                                             </View>
-                                                            <View style={styles.tiles}>
-                                                                  <Typography size={14} bold>Status : </Typography>
-                                                                  <Typography size={14}>Accepted</Typography>
-                                                            </View>
+                                                           
                                                       </View>
+                                                       )}
+
+                                                      { items.STATUS === "Pending" &&(
+
                                                       <View style={[styles.box, { marginLeft: 10 }]}>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Order no : </Typography>
-                                                                  <Typography size={14}>NAL020</Typography>
+                                                                  <Typography size={14}>{items.ORDER_NO}</Typography>
                                                             </View>
-                                                            <View style={styles.tiles}>
-                                                                  <Typography size={14} bold>Transporter : </Typography>
-                                                                  <Typography size={14}>VRL</Typography>
-                                                            </View>
+                                                            
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Vehicle No : </Typography>
-                                                                  <Typography size={14}>KA26-1234</Typography>
+                                                                  <Typography size={14}>KA26-12345</Typography>
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Vehicle Type : </Typography>
-                                                                  <Typography size={14}>Container</Typography>
+                                                                  <Typography size={14}>{items.VEHICLE_TYPE}</Typography>
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Vehicle Size : </Typography>
-                                                                  <Typography size={14}>22Ft</Typography>
+                                                                  <Typography size={14}>{items.VEHICLE_SIZE}</Typography>
                                                             </View>
                                                       </View>
+                                                      )}  
+
+                                                      {items.STATUS === "Accept" && (
+                                                       <View style={[styles.box, { marginRight: 10 }]}>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold >From : </Typography>
+                                                                   <Typography size={14}>{items.FROM_LOCATION}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>To : </Typography>
+                                                                   <Typography size={14}>{items.TO_LOCATION}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Date : </Typography>
+                                                                   <Typography size={14}>{items.ORDER_DATE}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Time : </Typography>
+                                                                   <Typography size={14}>10:11 AM</Typography>
+                                                             </View>
+                                                            
+                                                       </View>
+
+                                                      )} 
+
+                                                      {items.STATUS === "Accept" && (
+                                                        <View style={[styles.box, { marginLeft: 10 }]}>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Order no : </Typography>
+                                                                   <Typography size={14}>{items.ORDER_NO}</Typography>
+                                                             </View>
+                                                             
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Vehicle No : </Typography>
+                                                                   <Typography size={14}>KA26-12345</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Vehicle Type : </Typography>
+                                                                   <Typography size={14}>{items.VEHICLE_TYPE}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Vehicle Size : </Typography>
+                                                                   <Typography size={14}>{items.VEHICLE_SIZE}</Typography>
+                                                             </View>
+                                                       </View>
+                                                      )}
+
+                                                      {items.STATUS === "Reject" && (
+                                                             <View style={[styles.box, { marginRight: 10 }]}>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold >From : </Typography>
+                                                                   <Typography size={14}>{items.FROM_LOCATION}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>To : </Typography>
+                                                                   <Typography size={14}>{items.TO_LOCATION}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Date : </Typography>
+                                                                   <Typography size={14}>{items.ORDER_DATE}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Time : </Typography>
+                                                                   <Typography size={14}>10:11 AM</Typography>
+                                                             </View>
+                                                            
+                                                       </View>
+ 
+                                                      )}
+                                                      
+                                                      {items.STATUS === "Reject" && (
+                                                             <View style={[styles.box, { marginLeft: 10 }]}>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Order no : </Typography>
+                                                                   <Typography size={14}>{items.ORDER_NO}</Typography>
+                                                             </View>
+                                                             
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Vehicle No : </Typography>
+                                                                   <Typography size={14}>KA26-12345</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Vehicle Type : </Typography>
+                                                                   <Typography size={14}>{items.VEHICLE_TYPE}</Typography>
+                                                             </View>
+                                                             <View style={styles.tiles}>
+                                                                   <Typography size={14} bold>Vehicle Size : </Typography>
+                                                                   <Typography size={14}>{items.VEHICLE_SIZE}</Typography>
+                                                             </View>
+                                                       </View>
+
+                                                      )}
+
+
                                                 </View>
-                                          </TouchableWithoutFeedback>
+                                                {/* // )} */}
+
+                                          </TouchableWithoutFeedback>:null}
+                                          </>
                                     )
                               })}
                         </Content>
@@ -164,4 +272,10 @@ const styles = StyleSheet.create({
       }
 });
 
-export default (OrderDetail);
+const mapStateToProps = state =>{
+      return{
+            orderDetails: state.bookingdetails.bookingdetails
+      }
+}
+
+export default connect(mapStateToProps,{GetbookingDetails})(OrderDetail);

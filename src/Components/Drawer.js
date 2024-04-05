@@ -1,15 +1,32 @@
 import { StyleSheet, View } from 'react-native'
 import { Icon, Divider } from 'react-native-elements';
-import React, { Component } from 'react'
+import React, { Component,useEffect,useState } from 'react'
 import Typography from '../Components/typography'
 import { theme } from "../Config/theme"
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import { Avatar } from 'react-native-elements';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { Loginid } from '../redux/actions/Loginid';
 
 
 
 const Drawer = (props) => {
+
+      // let data = props.userdata;
+      // console.log("newdataaaaaa",data.Items[0].USER_NAME)
+
+
+      const[iddata ,setIdData] = useState([])
+
+      useEffect(()=>{
+
+           if(props.userdata){
+            setIdData(props.userdata.Items[0])
+           }
+      },[props.userdata])
+
+      console.log("statedataaaa",iddata.USER_NAME)
+
       return (
             <DrawerContentScrollView {...props}>
                   <View>
@@ -23,10 +40,29 @@ const Drawer = (props) => {
                                                 size={40}
                                                 source={require('../Asets/profile.jpg')}
                                           />
-                                    <View style={{ marginLeft: 10, marginTop: 3 }}>
+                                            {/* <View style={{ marginLeft: 10, marginTop: 3 }}>
 
-                                          <Typography size={14} color={"black"} style={{ marginTop: 8 }}>UserName</Typography>
-                                    </View></View>
+                                              <Typography size={14} color={"black"} style={{ marginTop: 8 }}>UserName</Typography>
+                                                
+                                                </View> */}
+
+
+
+                                                {/* {iddata.map((item,index)=>{
+                                                      return(
+                                                            <View style={{ marginLeft: 10, marginTop: 3 }}>
+
+                                                            <Typography size={14} color={"black"} style={{ marginTop: 8 }}>{item.USER_NAME}</Typography>
+                                                              
+                                                              </View>
+                                                      )
+                                                })}  */}
+
+                                                <View style={{ marginLeft: 10, marginTop: 3 }}>
+                                                 <Typography size={14} color={"black"} style={{ marginTop: 8 }}>{iddata.USER_NAME}</Typography> 
+                                                </View>
+
+                                    </View>
                         </View>
 
                         <DrawerItem
@@ -75,4 +111,10 @@ const styles = StyleSheet.create({
       },
 })
 
-export default (Drawer)
+const mapStateToProps = (state)=>{
+      return{
+            userdata : state.logindata.logindata
+      }
+}
+
+export default connect(mapStateToProps,{Loginid})(Drawer)

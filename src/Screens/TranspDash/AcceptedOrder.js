@@ -50,7 +50,7 @@ const PendingOrder = (props) => {
                                           />
                                     </TouchableOpacity>
                                     <View>
-                                          <Typography type='bold' style={{ marginTop: 5, marginLeft: 7 }} size={19}>Order Details</Typography>
+                                          <Typography type='bold' style={{ marginTop: 5, marginLeft: 7 }} size={19}>Accepted Order</Typography>
                                     </View>
                               </View>}
                         />
@@ -162,7 +162,7 @@ const PendingOrder = (props) => {
                               <View style={styles.button}>
                                     <TouchableOpacity>
                                           <LinearGradient colors={['#8EDD01', '#669B05']} style={{ padding: 20, alignItems: 'center', paddingVertical: 12, borderRadius: 10 }} useAngle={true} angle={200} angleCenter={{ x: 0.5, y: 0.5 }}>
-                                                <Typography size={20} color="white" type="extraBold">Accept</Typography>
+                                                <Typography size={20} color="white" type="extraBold">Add Driver</Typography>
                                           </LinearGradient>
                                     </TouchableOpacity>
                               </View>
@@ -170,7 +170,7 @@ const PendingOrder = (props) => {
                               <View style={styles.button}>
                                     <TouchableOpacity>
                                           <LinearGradient colors={['#F10201', "#C20000"]} style={{ padding: 20, alignItems: 'center', paddingVertical: 12, borderRadius: 10 }} >
-                                                <Typography size={20} color="white" type="extraBold">Reject</Typography>
+                                                <Typography size={20} color="white" type="extraBold">Add Truck</Typography>
                                           </LinearGradient>
                                     </TouchableOpacity>
                               </View>

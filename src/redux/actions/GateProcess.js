@@ -2,7 +2,7 @@ import axios from "axios";
 import api from '../../Utils/api'
 
 export const GateIn = (data) => async (dispatch, getState) => {
-      console.log("GATEIN------------->", `${api.protocol}${api.url}${api.gateIn}`, { ...data });
+      // console.log("GATEIN------------->", `${api.protocol}${api.url}${api.gateIn}`, { ...data });
       return new Promise((resolve, reject) => {
 
             axios.post(`${api.protocol}${api.url}${api.gateIn}`,
