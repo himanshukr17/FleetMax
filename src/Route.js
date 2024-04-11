@@ -18,6 +18,8 @@ import BookingStatusDetil from "./Screens/Booking/BookingStatusDetail";
 import Transporter from "./Screens/TranspDash/Transporter";
 import OrderDetail from "./Screens/TranspDash/OrderDetail";
 import PendingOrder from "./Screens/TranspDash/PendingOrder";
+import AcceptedOrder from "./Screens/TranspDash/AcceptedOrder";
+import RejectedOrder from "./Screens/TranspDash/RejectedOrder";
 import AddTruck from "./Screens/AddDetail/AddTruck";
 import AddDriver from "./Screens/AddDetail/AddDriver";
 import SideDrawer from "./Components/Drawer"
@@ -28,13 +30,12 @@ import GetOrder from "./Screens/TruckDriver/GetOrder";
 import MapTruck from "./Screens/TruckDriver/MapTruck";
 import CompOrder from "./Screens/TruckDriver/CompOrder";
 import POD from "./Screens/TruckDriver/POD";
-import AcceptedOrder from "./Screens/TranspDash/AcceptedOrder";
-import RejectedOrder from "./Screens/TranspDash/RejectedOrder";
 import { FavourableRoutes } from "./redux/actions/FavourableRoute";
 import { GetbookingDetails } from "./redux/actions/GetbookingDetails";
 import { GetBookingstatus } from "./redux/actions/GetBookingstatus";
 import { Getvehicledetails } from "./redux/actions/Getvehicledetails";
 import { Getdriverdetails } from "./redux/actions/GetDriverDetails";
+// import { Statusupdate } from "./redux/actions/Statusupdate";
 
 
 

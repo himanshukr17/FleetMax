@@ -3,11 +3,11 @@ import axios from "axios";
 
 
 export const FavourableRoutes = ()=>(dispatch, getState)=>{
-    console.log("getstateeeee",getState().logindata.logindata.Items[0].USER_ID)
+    // console.log("getstateeeee",getState().logindata.logindata.Items[0].USER_ID)
 
     const USERID = getState().logindata.logindata.Items[0].USER_ID
 
-    console.log("mainstateeeeeeeeeeee------>",USERID)
+    // console.log("mainstateeeeeeeeeeee------>",USERID)
 
     return new Promise ((resolve, reject)=>{
 

@@ -34,6 +34,11 @@ const Login = (props) => {
      
          props.Loginid(userid,password).then(res=>{
             if(res="success"){
+                Snackbar.show({
+                    text:"Login Successfully",
+                    backgroundColor:"green",
+                    // duration:Snackbar.LENGTH_SHORT
+                })
                 props.navigation.navigate("Home");
 
             }
@@ -41,11 +46,12 @@ const Login = (props) => {
             Snackbar.show({
                 text:"Invalid id or password",
                 backgroundColor:"red",
-                duration:Snackbar.LENGTH_SHORT,
+                // duration:Snackbar.LENGTH_SHORT,
             });
          })
          setUserId("");
          setPassword('');
+
     }
 
 

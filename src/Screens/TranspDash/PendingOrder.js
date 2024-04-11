@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, TouchableWithoutFeedback, ActivityIndicator, Alert } from "react-native";
 import Nav from "../../Components/Header/Nav";
+import Snackbar from "react-native-snackbar";
 import Container from "../../Components/Layout/Conatiner";
 import Content from "../../Components/Layout/Content";
 import Header from "../../Components/Layout/Header";
@@ -11,10 +12,27 @@ import { Avatar, Divider, Overlay } from 'react-native-elements';
 import Footer from "../../Components/Layout/Footer"
 import Button from "../../Components/CustomButton/Button";
 import LinearGradient from "react-native-linear-gradient";
+import { Statusupdate } from "../../redux/actions/Statusupdate";
+import { Loginid } from "../../redux/actions/Loginid";
+import { connect } from 'react-redux';
+import { GetbookingDetails } from "../../redux/actions/GetbookingDetails";
 
 
 
 const PendingOrder = (props) => {
+
+      // let dataid = props.userID.Items[0].USER_ID
+      // console.log("login id123 ----->", dataid);
+
+      let value = props.route.params
+      console.log("screen ", value)
+
+      const [data, setData] = useState(value)
+
+      // useEffect (()=>{
+
+      // },[data]);
+
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -30,8 +48,46 @@ const PendingOrder = (props) => {
             }
       }, [menloop]);
 
-      let data = props.route.params
-      console.log("screen ", data)
+      const HandelSubmit = (val) => {   
+            
+            props.Statusupdate({
+                 "USER_ID": props.userID.Items[0].USER_ID,
+                 "ORDER_NO": data.ORDER_NO,
+                 "STATUS": val
+             }).then(res => {
+                  if (res == "success") {
+                        props.GetbookingDetails()
+                        props.navigation.goBack()
+                        setTimeout(() => {
+                              Snackbar.show({
+                                    text: (val == "Accept" ? 'Approve successfuly' : "Rejected successfuly"),
+                                    duration: Snackbar.LENGTH_SHORT,
+                              })
+                        }, 500)
+                  }
+            }).catch(err => {
+                  setTimeout(() => {
+                        Snackbar.show({
+                              text: 'unable to update application',
+                              duration: Snackbar.LENGTH_SHORT,
+                        })
+                  }, 500)
+            })
+            // Alert.alert("Order Accepted")
+            // props.navigation.goBack()
+            // console.log("apipassword",props.userID.Items[0].USER_ID)
+            // console.log("Order no--->", data.ORDER_NO)
+            // console.log("pressed", val);            
+      }
+
+      // const Rejectorder = (val) => {
+      //       Alert.alert("Order Rejected")
+      //       console.log("Rejected", val)
+      // }     
+      // const date = data.ORDER_DATE
+      // const data = new Date(data.ORDER_DATE)
+      // const ddd = new Date(date)
+      // console.log("new date ----------->",  data.ORDER_DATE)
 
       return (
             <Container>
@@ -95,7 +151,7 @@ const PendingOrder = (props) => {
 
                                     <Input style={styles.input}
                                           disabled
-                                          value="12th Sep 2023"
+                                          value={data.Time}
                                     />
                               </View>
 
@@ -160,7 +216,7 @@ const PendingOrder = (props) => {
                         <View style={{ padding: 10, flexDirection: "row", justifyContent: "space-around" }}>
                               
                               <View style={styles.button}>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity  onPress = {() => {HandelSubmit("Accept")}}>
                                           <LinearGradient colors={['#8EDD01', '#669B05']} style={{ padding: 20, alignItems: 'center', paddingVertical: 12, borderRadius: 10 }} useAngle={true} angle={200} angleCenter={{ x: 0.5, y: 0.5 }}>
                                                 <Typography size={20} color="white" type="extraBold">Accept</Typography>
                                           </LinearGradient>
@@ -168,7 +224,7 @@ const PendingOrder = (props) => {
                               </View>
 
                               <View style={styles.button}>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={() =>{HandelSubmit("Reject")} }>
                                           <LinearGradient colors={['#F10201', "#C20000"]} style={{ padding: 20, alignItems: 'center', paddingVertical: 12, borderRadius: 10 }} >
                                                 <Typography size={20} color="white" type="extraBold">Reject</Typography>
                                           </LinearGradient>
@@ -196,4 +252,12 @@ const styles = StyleSheet.create({
       }
 })
 
-export default (PendingOrder);
+const mapStateToProps = state =>{
+      return{
+            userID: state.logindata.logindata
+      }
+  }
+
+export default connect(mapStateToProps,{Statusupdate,Loginid,GetbookingDetails})(PendingOrder);
+
+// export default (PendingOrder);

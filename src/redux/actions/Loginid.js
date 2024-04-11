@@ -2,8 +2,8 @@ import axios from 'axios';
 import api from '../../Utils/api';
 
 export const Loginid = (userid, pas) => async (dispatch, getState) => {
-  console.log('loginiddddddd---------->', userid, pas);
-  console.log('hittttttttttttt', userid, pas);
+  // console.log('loginiddddddd---------->', userid, pas);
+  // console.log('hittttttttttttt', userid, pas);
 
   return new Promise((resolve, reject) => {
    

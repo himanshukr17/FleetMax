@@ -25,7 +25,7 @@ const Drawer = (props) => {
            }
       },[props.userdata])
 
-      console.log("statedataaaa",iddata.USER_NAME)
+      // console.log("statedataaaa",iddata.USER_NAME)
 
       return (
             <DrawerContentScrollView {...props}>

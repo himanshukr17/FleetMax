@@ -97,21 +97,21 @@ const Transporter = (props) => {
                               <View style={{ flexDirection: "row", justifyContent: "center" }}>
 
                                     <View style={styles.card}>
-                                          <TouchableOpacity onPress={() => props.navigation.navigate("OrderDetail")}>
+                                          <TouchableOpacity onPress={() => props.navigation.navigate("OrderDetail","Accept")}>
                                                 <Typography size={18} color="green" type="extraBold" style={{ alignSelf: "center", paddingTop: 20 }}>Accepted</Typography>
                                                 <Typography size={15} style={{ alignSelf: "center", paddingBottom: 20 }}>16</Typography>
                                           </TouchableOpacity>
                                     </View>
 
                                     <View style={styles.card}>
-                                          <TouchableOpacity onPress={() => props.navigation.navigate("OrderDetail")}>
+                                          <TouchableOpacity onPress={() => props.navigation.navigate("OrderDetail","Pending")}>
                                                 <Typography size={18} color="yellow" type="extraBold" style={{ alignSelf: "center", paddingTop: 20 }}>Pending</Typography>
                                                 <Typography size={15} style={{ alignSelf: "center", paddingBottom: 20 }}>11</Typography>
                                           </TouchableOpacity>
                                     </View>
 
                                     <View style={styles.card}>
-                                          <TouchableOpacity onPress={() => props.navigation.navigate("OrderDetail")}>
+                                          <TouchableOpacity onPress={() => props.navigation.navigate("OrderDetail","Reject")}>
                                                 <Typography size={18} color="red" type="extraBold" style={{ alignSelf: "center", paddingTop: 20 }}>Rejected</Typography>
                                                 <Typography size={15} style={{ alignSelf: "center", paddingBottom: 20 }}>2</Typography>
                                           </TouchableOpacity>

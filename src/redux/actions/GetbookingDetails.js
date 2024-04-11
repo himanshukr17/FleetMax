@@ -5,7 +5,7 @@ import axios from "axios";
 export const GetbookingDetails = ()=>(dispatch, getState)=>{
 
    const USERID = getState().logindata.logindata.Items[0].USER_ID
-   console.log("transporter----------->",USERID)
+  //  console.log("transporter----------->",USERID)
    
 
     return new Promise ((resolve, reject)=>{

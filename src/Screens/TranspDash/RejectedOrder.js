@@ -14,7 +14,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 
 
-const PendingOrder = (props) => {
+const RejectedOrder = (props) => {
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -95,7 +95,7 @@ const PendingOrder = (props) => {
 
                                     <Input style={styles.input}
                                           disabled
-                                          value="12th Sep 2023"
+                                          value={data.Time}
                                     />
                               </View>
 
@@ -196,4 +196,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default (PendingOrder);
+export default (RejectedOrder);

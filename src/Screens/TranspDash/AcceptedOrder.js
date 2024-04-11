@@ -14,7 +14,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 
 
-const PendingOrder = (props) => {
+const AcceptedOrder = (props) => {
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -196,4 +196,4 @@ const styles = StyleSheet.create({
       }
 })
 
-export default (PendingOrder);
+export default (AcceptedOrder);

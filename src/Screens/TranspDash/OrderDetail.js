@@ -17,8 +17,11 @@ const OrderDetail = (props) => {
 
 
       let data = props.orderDetails
-      console.log("order detailsssss", data)
-      // console.log("hellooooooooooo")
+      // console.log("order detailsssss", data)
+
+
+      // const lengtharr = data.length
+      // console.log("length------>>",lengtharr);
 
       const [menloop, setmenloop] = useState(1)
       const mentrigger = () => {
@@ -33,9 +36,10 @@ const OrderDetail = (props) => {
                   menref.current?.play();
             }
       }, [menloop]);
-      let n = [1, 2, 3, 4, 5]
 
-      console.log("nnnnnnnnnnnnn",props.route.params);
+
+      // let n = [1, 2, 3, 4, 5]
+      // console.log("nnnnnnnnnnnnn",props.route.params);
 
       return (
             <>
@@ -54,6 +58,7 @@ const OrderDetail = (props) => {
                                                       style={{ width: 100, height: 27, marginBottom: -10, marginTop: -2 }}
                                                 />
                                           </TouchableOpacity>
+
                                           <View>
                                                 <Typography type='bold' style={{ marginTop: 5, marginLeft: 7 }} size={19}>Detail View</Typography>
                                           </View>
@@ -67,11 +72,11 @@ const OrderDetail = (props) => {
                               </View> */}
 
                               {data && data.map(items => {
-                                    console.log("status---------->>>>", items.STATUS)
+                                    // console.log("status---------->>>>", items.STATUS)
                                     return (<>
                                           {items.STATUS == props.route.params ?<TouchableWithoutFeedback
                                                 key={items}
-                                                onPress={() => props.navigation.navigate("PendingOrder",{...items})}>
+                                                onPress={() => props.navigation.navigate(items.STATUS=="Pending"?"PendingOrder":items.STATUS=="Accept"?"AcceptedOrder":"RejectedOrder",{...items})}>
                                                 {/* { items.STATUS === "Accepted" && ( */}
                                                 <View style={styles.container}>
 
@@ -91,7 +96,7 @@ const OrderDetail = (props) => {
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Time : </Typography>
-                                                                  <Typography size={14}>10:11 AM</Typography>
+                                                                  <Typography size={14}>{items.Time}</Typography>
                                                             </View>
                                                            
                                                       </View>
@@ -107,7 +112,7 @@ const OrderDetail = (props) => {
                                                             
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Vehicle No : </Typography>
-                                                                  <Typography size={14}>KA26-12345</Typography>
+                                                                  <Typography size={14}>{items.VEHICLE_NO}</Typography>
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Vehicle Type : </Typography>
@@ -136,7 +141,7 @@ const OrderDetail = (props) => {
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Time : </Typography>
-                                                                   <Typography size={14}>10:11 AM</Typography>
+                                                                   <Typography size={14}>{items.Time}</Typography>
                                                              </View>
                                                             
                                                        </View>
@@ -152,7 +157,7 @@ const OrderDetail = (props) => {
                                                              
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle No : </Typography>
-                                                                   <Typography size={14}>KA26-12345</Typography>
+                                                                   <Typography size={14}>{items.VEHICLE_NO}</Typography>
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle Type : </Typography>
@@ -181,7 +186,7 @@ const OrderDetail = (props) => {
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Time : </Typography>
-                                                                   <Typography size={14}>10:11 AM</Typography>
+                                                                   <Typography size={14}>{items.Time}</Typography>
                                                              </View>
                                                             
                                                        </View>
@@ -197,7 +202,7 @@ const OrderDetail = (props) => {
                                                              
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle No : </Typography>
-                                                                   <Typography size={14}>KA26-12345</Typography>
+                                                                   <Typography size={14}>{items.VEHICLE_NO}</Typography>
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle Type : </Typography>

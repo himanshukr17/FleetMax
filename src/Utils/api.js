@@ -14,6 +14,7 @@ module.exports = {
       gateOut: 'GateOutInspection',
       addOrder:'OrderMaster',
       favourableroute:'getFavourableRoutes?Supplier_id=',
+      statusupdate:'userOrderMapping',
 
 
 
