@@ -68,7 +68,7 @@ const OrderDetail = (props) => {
                         <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
                         <Content style={{ paddingTop: 10 }}>
                               {/* <View style={{ alignSelf: "center" }}>
-                                    <Typography size={22} type="extraBold" color="green" style={{ textDecorationLine: 'underline', fontStyle: 'italic', marginTop: "2%" }}>Accepted Orders</Typography>
+                                    <Typography size={22} type="extraBold" color="green" style={{ textDecorationLine: 'underline', 1fontStyle: 'italic', marginTop: "2%" }}>Accepted Orders</Typography>
                               </View> */}
 
                               {data && data.map(items => {

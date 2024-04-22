@@ -3,7 +3,8 @@ import axios from "axios";
 
 
 export const FavourableRoutes = ()=>(dispatch, getState)=>{
-    // console.log("getstateeeee",getState().logindata.logindata.Items[0].USER_ID)
+    
+    console.log("getstateeeee",getState().logindata.logindata.Items[0].USER_ID)
 
     const USERID = getState().logindata.logindata.Items[0].USER_ID
 
@@ -19,7 +20,7 @@ export const FavourableRoutes = ()=>(dispatch, getState)=>{
             maxBodyLength: Infinity,
             headers: { 
             'Authorization': 'Basic c2ItNzA5ZDc4MWEtMGMwYy00Njc5LTllNjEtMGYxYTg4ZWJiOTRiIWIxMjIwfGl0LXJ0LW5lYy1kZXYtMi1rNWl6emU3OCFiMTQ4OmQwMmFkNGQ4LTJjZTgtNDdlZC05YmNjLTRlYWZjNWVlMzRiMSRsV0lSV09BbmVlRjRqZkhPNnNyZUdOX1ZoaGEyQ1g2alZXS1hqLTA1ay0wPQ=='
-           }
+            }
         },
       )
 // let config = {

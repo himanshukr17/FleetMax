@@ -14,7 +14,8 @@ import { connect } from "react-redux";
 const Login = (props) => {
 
     const [hide, sethide] = useState(true)
-    const[userid, setUserId] = useState('');
+    // const[userid, setUserId] = useState('');
+    const [userid, setUserId] = useState('')
     const[password, setPassword] = useState('');
 
 

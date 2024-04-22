@@ -12,7 +12,7 @@ export const GetBookingstatus = ()=>(dispatch, getState)=>{
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'https://nec-dev-2-k5izze78.it-cpi021-rt.cfapps.in30.hana.ondemand.com/http/Fleetmax/getBookingStatus?Supplier_Id=ron',
+            url: 'https://nec-dev-2-k5izze78.it-cpi021-rt.cfapps.in30.hana.ondemand.com/http/Fleetmax/getBookingStatus?Supplier_Id=22',
             headers: { 
               'Authorization': 'Basic c2ItNzA5ZDc4MWEtMGMwYy00Njc5LTllNjEtMGYxYTg4ZWJiOTRiIWIxMjIwfGl0LXJ0LW5lYy1kZXYtMi1rNWl6emU3OCFiMTQ4OmQwMmFkNGQ4LTJjZTgtNDdlZC05YmNjLTRlYWZjNWVlMzRiMSRsV0lSV09BbmVlRjRqZkhPNnNyZUdOX1ZoaGEyQ1g2alZXS1hqLTA1ay0wPQ=='
             }
