@@ -15,6 +15,8 @@ module.exports = {
       addOrder:'OrderMaster',
       favourableroute:'getFavourableRoutes?Supplier_id=',
       statusupdate:'userOrderMapping',
+      bookingstatus:'getBookingStatus?Supplier_Id=',
+      // Bookingstatus:getBookingStatus?Supplier_Id=22
 
 
 

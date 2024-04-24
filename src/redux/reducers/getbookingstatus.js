@@ -10,7 +10,7 @@ export default function (state = initialState, action ){
 
 switch (action.type) {
   case 'BOOKINGSTATUS':
-    // console.log("redux reducerr",action.payload)
+    console.log("redux reducerr------>>>>>",action.payload)
     return {...state, bookingstatus: action.payload};
 
   default:

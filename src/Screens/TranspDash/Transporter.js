@@ -24,65 +24,16 @@ import moment from 'moment';
 
 const Transporter = props => {
   data = props.renderdata;
-  //   console.log("all api data---->>>>",data)
-  //   const getdate = data[0].ORDER_DATE;
+ 
 
   const [menloop, setmenloop] = useState(1);
   const [lastweekdate, setLastWeek] = useState([]);
   const [lastmonthdate, setLastMonth] = useState([]);
   const [allmonthdata, setAllmonthdata] = useState([]);
+  // console.log("al data-------->",allmonthdata);
+  // console.log("weekorder------>",lastweekdate);
+  // console.log("monthdata----->>>",lastmonthdate);
 
-  console.log('order no.=', lastweekdate);
-  //   console.log("status=",lastweekdate[0].STATUS);
-
-  const [dashboardata, setdashboardata] = useState([
-    {Acceptweek: 0, Pendingweek: 0, Rejectweek: 0},
-    {Acceptmonth: 0, Pendingmonth: 0, Rejectmonth: 0},
-    {Acceptallmonth: 0, Pendingallmonth: 0, Rejectallmonth: 0},
-  ]);
-
-  useEffect(() => {
-    function functio(array, StatusToFInd) {
-      return array.filter(obj => obj.STATUS === StatusToFInd);
-    }
-    const Acceptweek = functio(lastweekdate, 'Accept');
-    const Acceptmonth = functio(lastmonthdate, 'Accept');
-    const Acceptallmonth = functio(allmonthdata, 'Accept');
-    // console.log("Order Accepted", Accept);
-    // const acceptlength = Accept.length
-    // console.log("acceptlength=",acceptlength)
-
-    const Pendingweek = functio(lastweekdate, 'Pending');
-    const Pendingmonth = functio(lastmonthdate, 'Pending');
-    const Pendingallmonth = functio(allmonthdata, 'Pending');
-    // console.log("Order Pending", Pending);
-    // const pendinglength = Pending.length
-    // console.log("pendinglength=",pendinglength)
-
-    const Rejectweek = functio(lastweekdate, 'Reject');
-    const Rejectmonth = functio(lastmonthdate, 'Reject');
-    const Rejectallmonth = functio(allmonthdata, 'Reject');
-    // console.log("Order Reject", Reject);
-    // const rejectlength = Reject.length
-    // console.log("rejectlength=",rejectlength)
-    setdashboardata([{Acceptweek: Acceptweek, Pendingweek: Pendingweek, Rejectweek: Rejectweek},
-      {Acceptmonth: Acceptmonth, Pendingmonth: Pendingmonth, Rejectmonth: Rejectmonth},
-      {Acceptallmonth: Acceptallmonth, Pendingallmonth: Pendingallmonth, Rejectallmonth: Rejectallmonth}])
-  }, [lastweekdate]);
-
-  const mentrigger = () => {
-    let i = menloop;
-    if (menloop < 1) {
-      setmenloop(i + 1);
-    }
-  };
-  console.log("week--------",dashboardata[0])
-  const menref = React.useRef();
-  useEffect(() => {
-    if (menref.current) {
-      menref.current?.play();
-    }
-  }, [menloop]);
 
   useEffect(() => {
     const emptydata = [];
@@ -109,22 +60,89 @@ const Transporter = props => {
           emptymonth.push(setdate);
           emptyalldata.push(setdate);
         } else if (new Date(apidate) >= new Date(lastmdate)) {
-          // console.log("date error")
           const setmonth = item;
           emptymonth.push(setmonth);
           emptyalldata.push(setmonth);
-          // console.log("Monthdata",item)
-        } else {
+        } 
+        else {
           const alldata = item;
           emptyalldata.push(alldata);
-          // console.log("allmonths",item)
         }
-      });
+      }); 
     }
+
     setLastWeek(emptydata);
     setLastMonth(emptymonth);
     setAllmonthdata(emptyalldata);
   }, [data]);
+
+ 
+
+  const [dashboardata, setdashboardata] = useState([
+    {Acceptweek: 0, Pendingweek: 0, Rejectweek: 0},
+    {Acceptmonth: 0, Pendingmonth: 0, Rejectmonth: 0},
+    {Acceptallmonth: 0, Pendingallmonth: 0, Rejectallmonth: 0},
+  ]);
+  const [ dashboardlength , setDashboardlength] = useState();
+  // console.log(dashboardlength.acceptweek);
+
+
+  useEffect(() => {
+    function functio(array, StatusToFInd) {
+      return array.filter(obj => obj.STATUS === StatusToFInd);
+    }
+   
+    const Acceptweek = functio(lastweekdate, 'Accept');
+    const Acceptmonth = functio(lastmonthdate, 'Accept');
+    const Acceptallmonth = functio(allmonthdata, 'Accept');
+    // const acceptallmonth = length(Acceptallmonth);
+    
+    const Pendingweek = functio(lastweekdate, 'Pending');
+    const Pendingmonth = functio(lastmonthdate, 'Pending');
+    const Pendingallmonth = functio(allmonthdata, 'Pending');
+   
+    const Rejectweek = functio(lastweekdate, 'Reject');
+    const Rejectmonth = functio(lastmonthdate, 'Reject');
+    const Rejectallmonth = functio(allmonthdata, 'Reject');
+    
+    setdashboardata([{Acceptweek: Acceptweek, Pendingweek: Pendingweek, Rejectweek: Rejectweek},
+      {Acceptmonth: Acceptmonth, Pendingmonth: Pendingmonth, Rejectmonth: Rejectmonth},
+      {Acceptallmonth: Acceptallmonth, Pendingallmonth: Pendingallmonth, Rejectallmonth: Rejectallmonth}])
+
+      function length(array){
+        return(
+          array.length
+        )
+      }
+      setDashboardlength({
+        acceptweek: length(Acceptweek),
+        acceptmonth: length(Acceptmonth),
+        acceptallmonth: length(Acceptallmonth),
+        pendingweek: length(Pendingweek),
+        pendingmonth: length(Pendingmonth),
+        pendingallmonth: length(Pendingallmonth),
+        rejectweek: length(Rejectweek),
+        rejectmonth: length(Rejectmonth),
+        rejectallmonth: length(Rejectallmonth),     
+     })     
+  }, [lastweekdate]);
+
+  console.log("dashboard------->>>>>>>",dashboardata[0].Acceptweek)
+
+  const mentrigger = () => {
+    let i = menloop;
+    if (menloop < 1) {
+      setmenloop(i + 1);
+    }
+  };
+  const menref = React.useRef();
+  useEffect(() => {
+    if (menref.current) {
+      menref.current?.play();
+    }
+  }, [menloop]);
+
+  // console.log("console kara krrrr---------->>>>>>>>>",dashboardata[0].Acceptweek);
 
   return (
     <>
@@ -184,12 +202,13 @@ const Transporter = props => {
               Last Week Orders
             </Typography>
           </View>
-
+        
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Accept')
+                  // props.navigation.navigate('OrderDetail', 'Accept')
+                  props.navigation.navigate('OrderDetail',{CLICKED_DATA: dashboardata[0].Acceptweek})
                 }>
                 <Typography
                   size={18}
@@ -201,7 +220,7 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  16
+                   {dashboardlength?.acceptweek}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -209,7 +228,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Pending')
+                  props.navigation.navigate('OrderDetail', {CLICKED_DATA: dashboardata[0].Pendingweek})
                 }>
                 <Typography
                   size={18}
@@ -221,7 +240,8 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  11
+                  {dashboardlength?.pendingweek}
+                  
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -229,7 +249,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Reject')
+                  props.navigation.navigate('OrderDetail', {CLICKED_DATA: dashboardata[0].Rejectweek})
                 }>
                 <Typography
                   size={18}
@@ -241,7 +261,7 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  2
+                  {dashboardlength?.rejectweek}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -264,7 +284,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Accept')
+                  props.navigation.navigate('OrderDetail', {CLICKED_DATA: dashboardata[1].Acceptmonth})
                 }>
                 <Typography
                   size={18}
@@ -276,7 +296,8 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  110
+                  {/* {dashboardlength?.Acceptmonth} */}
+                  {dashboardlength?.acceptmonth}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -284,7 +305,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Pending')
+                  props.navigation.navigate('OrderDetail', {CLICKED_DATA:dashboardata[1].Pendingmonth})
                 }>
                 <Typography
                   size={18}
@@ -296,7 +317,7 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  5
+                  {dashboardlength?.pendingmonth}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -304,7 +325,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Reject')
+                  props.navigation.navigate('OrderDetail',{CLICKED_DATA:dashboardata[1].Rejectmonth})
                 }>
                 <Typography
                   size={18}
@@ -316,7 +337,7 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  7
+                  {dashboardlength?.rejectmonth}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -341,7 +362,6 @@ const Transporter = props => {
                 fontStyle: 'italic',
                 marginTop: '5%',
               }}>
-              {' '}
               All Orders
             </Typography>
           </View>
@@ -349,7 +369,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Accept')
+                  props.navigation.navigate('OrderDetail', {CLICKED_DATA: dashboardata[2].Acceptallmonth})
                 }>
                 <Typography
                   size={18}
@@ -361,7 +381,7 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  16
+                  {dashboardlength?.acceptallmonth}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -369,7 +389,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Pending')
+                  props.navigation.navigate('OrderDetail', {CLICKED_DATA: dashboardata[2].Pendingallmonth })
                 }>
                 <Typography
                   size={18}
@@ -381,7 +401,7 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  11
+                  {dashboardlength?.pendingallmonth}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -389,7 +409,7 @@ const Transporter = props => {
             <View style={styles.card}>
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('OrderDetail', 'Reject')
+                  props.navigation.navigate('OrderDetail',{CLICKED_DATA: dashboardata[2].Rejectallmonth})
                 }>
                 <Typography
                   size={18}
@@ -401,7 +421,7 @@ const Transporter = props => {
                 <Typography
                   size={15}
                   style={{alignSelf: 'center', paddingBottom: 20}}>
-                  2
+                  {dashboardlength?.rejectallmonth}
                 </Typography>
               </TouchableOpacity>
             </View>

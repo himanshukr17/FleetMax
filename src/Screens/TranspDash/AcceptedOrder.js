@@ -87,7 +87,7 @@ const AcceptedOrder = (props) => {
 
                                     <Input style={styles.input}
                                           disabled
-                                          value={data.ORDER_DATE}
+                                          value={data.date}
                                     />
                               </View>
                               <View style={styles.feilds}>
@@ -95,7 +95,7 @@ const AcceptedOrder = (props) => {
 
                                     <Input style={styles.input}
                                           disabled
-                                          value="12th Sep 2023"
+                                          value={data.time}
                                     />
                               </View>
 

@@ -13,12 +13,14 @@ import { GetbookingDetails } from "../../redux/actions/GetbookingDetails";
 
 
 
-const OrderDetail = (props) => {
+const OrderDetail = (props,{route}) => {
 
 
-      let data = props.orderDetails
-      // console.log("order detailsssss", data)
+      // let data = props.orderDetails
+      const data = props.route.params.CLICKED_DATA 
 
+      // console.log("apidata-------->>>", props.route.params.CLICKED_DATA);
+      console.log("dataaaaaaaaa",data)
 
       // const lengtharr = data.length
       // console.log("length------>>",lengtharr);
@@ -72,11 +74,20 @@ const OrderDetail = (props) => {
                               </View> */}
 
                               {data && data.map(items => {
-                                    // console.log("status---------->>>>", items.STATUS)
+                                   
+                                    const [datePart, timePart] = items.ORDER_DATE.split(' '); // Split date and time parts
+                                    const [day, month, year] = datePart.split('-'); // Split day, month, year
+                                    const [hour, minute, second] = timePart.split(':');
+                                    newdate = new Date(year, month - 1, day, hour, minute, second);
+                                     const date = newdate.toLocaleDateString();
+                                     const time = newdate.toLocaleTimeString();
+
                                     return (<>
-                                          {items.STATUS == props.route.params ?<TouchableWithoutFeedback
+                                          {items.STATUS ?<TouchableWithoutFeedback
                                                 key={items}
-                                                onPress={() => props.navigation.navigate(items.STATUS=="Pending"?"PendingOrder":items.STATUS=="Accept"?"AcceptedOrder":"RejectedOrder",{...items})}>
+                                                onPress={() => props.navigation.navigate(items.STATUS==="Accept"?"AcceptedOrder":"RejectedOrder",{...items,date:date,time:time})}>
+                                                {/* onPress={() => props.navigation.navigate(items.STATUS==="Pending"?"PendingOrder":items.STATUS==="Accept"?"AcceptedOrder":"RejectedOrder",{...items,date:date,time:time})}> */}
+
                                                 {/* { items.STATUS === "Accepted" && ( */}
                                                 <View style={styles.container}>
 
@@ -92,11 +103,11 @@ const OrderDetail = (props) => {
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Date : </Typography>
-                                                                  <Typography size={14}>{items.ORDER_DATE}</Typography>
+                                                                  <Typography size={14}>{date}</Typography>
                                                             </View>
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Time : </Typography>
-                                                                  <Typography size={14}>{items.Time}</Typography>
+                                                                  <Typography size={14}>{time}</Typography>
                                                             </View>
                                                            
                                                       </View>
@@ -110,10 +121,10 @@ const OrderDetail = (props) => {
                                                                   <Typography size={14}>{items.ORDER_NO}</Typography>
                                                             </View>
                                                             
-                                                            <View style={styles.tiles}>
+                                                            {/* <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Vehicle No : </Typography>
                                                                   <Typography size={14}>{items.VEHICLE_NO}</Typography>
-                                                            </View>
+                                                            </View> */}
                                                             <View style={styles.tiles}>
                                                                   <Typography size={14} bold>Vehicle Type : </Typography>
                                                                   <Typography size={14}>{items.VEHICLE_TYPE}</Typography>
@@ -137,11 +148,11 @@ const OrderDetail = (props) => {
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Date : </Typography>
-                                                                   <Typography size={14}>{items.ORDER_DATE}</Typography>
+                                                                   <Typography size={14}>{date}</Typography>
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Time : </Typography>
-                                                                   <Typography size={14}>{items.Time}</Typography>
+                                                                   <Typography size={14}>{time}</Typography>
                                                              </View>
                                                             
                                                        </View>
@@ -155,10 +166,10 @@ const OrderDetail = (props) => {
                                                                    <Typography size={14}>{items.ORDER_NO}</Typography>
                                                              </View>
                                                              
-                                                             <View style={styles.tiles}>
+                                                             {/* <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle No : </Typography>
                                                                    <Typography size={14}>{items.VEHICLE_NO}</Typography>
-                                                             </View>
+                                                             </View> */}
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle Type : </Typography>
                                                                    <Typography size={14}>{items.VEHICLE_TYPE}</Typography>
@@ -182,11 +193,11 @@ const OrderDetail = (props) => {
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Date : </Typography>
-                                                                   <Typography size={14}>{items.ORDER_DATE}</Typography>
+                                                                   <Typography size={14}>{date}</Typography>
                                                              </View>
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Time : </Typography>
-                                                                   <Typography size={14}>{items.Time}</Typography>
+                                                                   <Typography size={14}>{time}</Typography>
                                                              </View>
                                                             
                                                        </View>
@@ -200,10 +211,10 @@ const OrderDetail = (props) => {
                                                                    <Typography size={14}>{items.ORDER_NO}</Typography>
                                                              </View>
                                                              
-                                                             <View style={styles.tiles}>
+                                                             {/* <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle No : </Typography>
                                                                    <Typography size={14}>{items.VEHICLE_NO}</Typography>
-                                                             </View>
+                                                             </View> */}
                                                              <View style={styles.tiles}>
                                                                    <Typography size={14} bold>Vehicle Type : </Typography>
                                                                    <Typography size={14}>{items.VEHICLE_TYPE}</Typography>

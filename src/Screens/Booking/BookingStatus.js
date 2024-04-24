@@ -22,6 +22,8 @@ import axios from "axios";
 const BookingStatus = (props) => {
 
     const [menloop, setmenloop] = useState(1)
+    const data = props.route.params
+
     const mentrigger = () => {
         let i = menloop
         if (menloop < 1) {
@@ -59,38 +61,53 @@ const BookingStatus = (props) => {
             </Header>
             <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
             <Content>
-                {n.map(items => {
+                {data && data.map(items => {
+
+                     const [datePart, timePart] = items.ORDER_DATE.split(' '); // Split date and time parts
+                     const [day, month, year] = datePart.split('-'); // Split day, month, year
+                     const [hour, minute, second] = timePart.split(':');
+                     newdate = new Date(year, month - 1, day, hour, minute, second);
+
+                     const date = newdate.toLocaleDateString();
+                     const time = newdate.toLocaleTimeString();
+
+                     
                     return (
+
+                        // {"APPROVED_BY": "sam", "CREATED_BY": "22", "FLAG": "", "FREUGHT_AMOUNT": "1212.0", "FROM_LOCATION": "delhi",
+                        //  "NUMBER_OF_DRIVER": "5", "ORDER_DATE": "18-03-2024 15:43:35 PM", "ORDER_NO": "2", "STATUS": "Accept",
+                        //   "TO_LOCATION": "Sonipat", "TRIP_TYPE": "km", "VEHICLE_SIZE": "30 * 50", "VEHICLE_TYPE": "two", "WEIGHT_OF_LOAD": "5.0"}
+                        
                         <TouchableWithoutFeedback
                         key={items}
-                        onPress={()=>props.navigation.navigate("BookingStatusDetil")}>
+                        onPress={()=>props.navigation.navigate("BookingStatusDetil", [items])}>
                             <View style={styles.container}>
                                 <View style={[styles.box, { marginRight: 10 }]}>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold >From : </Typography>
-                                        <Typography size={14}>Bangalore</Typography>
+                                        <Typography size={14}>{items.FROM_LOCATION}</Typography>
                                     </View>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>To : </Typography>
-                                        <Typography size={14}>Delhi</Typography>
+                                        <Typography size={14}>{items.TO_LOCATION}</Typography>
                                     </View>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>Date : </Typography>
-                                        <Typography size={14}>11th Sep 2023</Typography>
+                                        <Typography size={14}>{date}</Typography>
                                     </View>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>Time : </Typography>
-                                        <Typography size={14}>10:11 AM</Typography>
+                                        <Typography size={14}>{time}</Typography>
                                     </View>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>Status : </Typography>
-                                        <Typography size={14}>Accepted</Typography>
+                                        <Typography size={14}>{items.STATUS}</Typography>
                                     </View>
                                 </View>
                                 <View style={[styles.box, { marginLeft: 10 }]}>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>Order no : </Typography>
-                                        <Typography size={14}>NAL020</Typography>
+                                        <Typography size={14}>{items.ORDER_NO}</Typography>
                                     </View>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>Transporter : </Typography>
@@ -102,11 +119,11 @@ const BookingStatus = (props) => {
                                     </View>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>Vehicle Type : </Typography>
-                                        <Typography size={14}>Container</Typography>
+                                        <Typography size={14}>{items.VEHICLE_TYPE}</Typography>
                                     </View>
                                     <View style={styles.tiles}>
                                         <Typography size={14} bold>Vehicle Size : </Typography>
-                                        <Typography size={14}>22Ft</Typography>
+                                        <Typography size={14}>{items.VEHICLE_SIZE}</Typography>
                                     </View>
                                 </View>
                             </View>

@@ -21,6 +21,10 @@ import PieChart from 'react-native-pie-chart'
 import axios from "axios";
 const BookingStatusDetil = (props) => {
 
+
+    const data = props.route.params
+    console.log("Details-------->>>>>>>>>>>",data);
+
     const [menloop, setmenloop] = useState(1)
     const mentrigger = () => {
         let i = menloop
@@ -57,104 +61,118 @@ const BookingStatusDetil = (props) => {
                 />
             </Header>
             <Divider style={{ backgroundColor: "black", height: 0.2, marginLeft: -3 }} />
-            <Content>
-                <View style={{ marginTop: "7%", marginLeft: "3%" }}>
-                <View style={styles.feilds}>
-                        <Typography size={17}>Order Number</Typography>
-                        <Input style={styles.input}
-                            value="MJK2342"
-                            disabled
-                        />
-                    </View>
+
+            {data && data.map(items=>{
+                 const [datePart, timePart] = items.ORDER_DATE.split(' '); // Split date and time parts
+                 const [day, month, year] = datePart.split('-'); // Split day, month, year
+                 const [hour, minute, second] = timePart.split(':');
+                 newdate = new Date(year, month - 1, day, hour, minute, second);
+
+                 const date = newdate.toLocaleDateString();
+                 const time = newdate.toLocaleTimeString();
+                return(
+                    <Content>
+                    <View style={{ marginTop: "7%", marginLeft: "3%" }}>
                     <View style={styles.feilds}>
-                        <Typography size={17}>From Location</Typography>
-                        <Input style={styles.input}
-                            value="Banglore"
-                            disabled
-                        />
+                            <Typography size={17}>Order Number</Typography>
+                            <Input style={styles.input}
+                                value={items.ORDER_NO}
+                                disabled
+                            />
+                        </View>
+                        <View style={styles.feilds}>
+                            <Typography size={17}>From Location</Typography>
+                            <Input style={styles.input}
+                                value={items.FROM_LOCATION}
+                                disabled
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>To Location</Typography>
+    
+                            <Input style={styles.input}
+                                disabled
+                                value={items.TO_LOCATION}
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Date :</Typography>
+    
+                            <Input style={styles.input}
+                                disabled
+                                value={date}
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Vehicle Type</Typography>
+    
+                            <Input style={styles.input}
+                                value={items.VEHICLE_TYPE}
+                                disabled
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Vehicle Size</Typography>
+    
+                            <Input style={styles.input}
+                                value={items.VEHICLE_SIZE}
+                                disabled
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Number of Drivers</Typography>
+    
+                            <Input style={styles.input}
+                                value={items.NUMBER_OF_DRIVER}
+                                disabled
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Freight Amount</Typography>
+    
+                            <Input style={styles.input}
+                                value={items.FREUGHT_AMOUNT}
+                                disabled
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Weight of Load</Typography>
+    
+                            <Input style={styles.input}
+                                value={items.WEIGHT_OF_LOAD}
+                                disabled
+                            />
+                        </View>
+    
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Trip Type</Typography>
+    
+                            <Input style={styles.input}
+                                value={items.TRIP_TYPE}
+                                disabled
+                            />
+                        </View>
+                        <View style={styles.feilds}>
+                            <Typography size={17}>Approve by</Typography>
+    
+                            <Input style={styles.input}
+                                value={items.APPROVED_BY}
+                                disabled
+                            />
+                        </View>
                     </View>
+                </Content>
 
-                    <View style={styles.feilds}>
-                        <Typography size={17}>To Location</Typography>
-
-                        <Input style={styles.input}
-                            disabled
-                            value="Delhi"
-                        />
-                    </View>
-
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Date & Time</Typography>
-
-                        <Input style={styles.input}
-                            disabled
-                            value="12th Sep 2023"
-                        />
-                    </View>
-
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Vehicle Type</Typography>
-
-                        <Input style={styles.input}
-                            value="Container"
-                            disabled
-                        />
-                    </View>
-
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Vehicle Size</Typography>
-
-                        <Input style={styles.input}
-                            value="22ft"
-                            disabled
-                        />
-                    </View>
-
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Number of Drivers</Typography>
-
-                        <Input style={styles.input}
-                            value="3"
-                            disabled
-                        />
-                    </View>
-
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Freight Amount</Typography>
-
-                        <Input style={styles.input}
-                            value="4000"
-                            disabled
-                        />
-                    </View>
-
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Weight of Load</Typography>
-
-                        <Input style={styles.input}
-                            value="120 KGs"
-                            disabled
-                        />
-                    </View>
-
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Trip Type</Typography>
-
-                        <Input style={styles.input}
-                            value="Round"
-                            disabled
-                        />
-                    </View>
-                    <View style={styles.feilds}>
-                        <Typography size={17}>Approve by</Typography>
-
-                        <Input style={styles.input}
-                            value="VHG"
-                            disabled
-                        />
-                    </View>
-                </View>
-            </Content>
+                )
+            })}
+           
         </Container>
     )
 }

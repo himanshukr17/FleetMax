@@ -21,16 +21,25 @@ import PieChart from 'react-native-pie-chart'
 import axios from "axios";
 import { connect } from "react-redux"
 import { FavourableRoutes } from "../../redux/actions/FavourableRoute";
+import { GetBookingstatus } from "../../redux/actions/GetBookingstatus";
+
 const Booking = (props) => {
 
 
     let data = props.favourable
-    // const length = data.length
-    // console.log("lengthhhhhh",length)
-    // const arrlength = Array.isArray(data.Items)?data.length:0;
-    // console.log("arrrayyyyyy",arrlength )
-    console.log("favourite routeeeeeeee", data.length)
-
+    let maindata = props.bookingstatus
+    // const mainlength = maindata.length
+    // console.log("maindata----------->>>>>>>",maindata);
+       function length (array, statustofind){
+        return array.filter((item)=> item.STATUS==statustofind)
+       } 
+       const acceptarr = length(maindata,"Accept");
+       const pendingarr = length(maindata,"Pending");
+       const rejectarr = length(maindata,"Reject");
+       const acceptlength = acceptarr.length;
+       const pendinglength = pendingarr.length;
+       const rejectlength = rejectarr.length;
+      
 
     const [menloop, setmenloop] = useState(1)
     const mentrigger = () => {
@@ -49,13 +58,11 @@ const Booking = (props) => {
 
     const [searchKey, setSearch] = useState(false)
 
-    const widthAndHeight = 130
-    const series = [100, 98, 185] // [rejected,pending,accepted]
+    const widthAndHeight = 150
+    const series = [rejectlength, pendinglength, acceptlength] // [rejected,pending,accepted]
     const sliceColor = ['#d23a3a', '#e2eb28', '#3d961d']
     let n = [1, 2, 3]
-    console.log("arrrayyyyyyyyyyy",n.length);
-    // const p = data.length
-    // console.log("dataaaaaaaaaa",p);
+ 
     return (
         <>
             <Overlay isVisible={searchKey}>
@@ -116,37 +123,45 @@ const Booking = (props) => {
                             </View>
                         </TouchableOpacity>
                     </View>
-                        <TouchableWithoutFeedback onPress={()=>props.navigation.navigate("BookingStatus")}>
+                        {/* <TouchableWithoutFeedback onPress={()=>props.navigation.navigate("BookingStatus")}> */}
                         <View style={styles.chart}>
                             <View style={{ flexDirection: 'column', flex: 1, paddingRight: 10 }}>
                                 <View style={{ marginBottom: 5 }}>
                                     <Typography size={15} bold>Booking Status</Typography>
                                 </View>
+                                <TouchableWithoutFeedback onPress={()=>props.navigation.navigate("BookingStatus", acceptarr)}>
                                 <View style={styles.bookingstatus}>
                                     <Typography size={15} type="bold" colour="#3d961d">Accepted</Typography>
-                                    <Typography size={15} colour="#3d961d">185</Typography>
-
+                                    <Typography size={15} colour="#3d961d">{acceptlength}</Typography>
                                 </View>
+                                </TouchableWithoutFeedback>
+
+                                <TouchableWithoutFeedback onPress={()=>props.navigation.navigate("BookingStatus", pendingarr)}>
                                 <View style={styles.bookingstatus}>
                                     <Typography size={15} type="bold" colour="#a4ab1d">Pending</Typography>
-                                    <Typography size={15} colour="#a4ab1d">98</Typography>
+                                    <Typography size={15} colour="#a4ab1d">{pendinglength}</Typography>
                                 </View>
+                                </TouchableWithoutFeedback>
+
+                                <TouchableWithoutFeedback onPress={()=>props.navigation.navigate("BookingStatus", rejectarr)}>
                                 <View style={[styles.bookingstatus, { borderBottomWidth: 0 }]}>
                                     <Typography size={15} type="bold" colour="#d23a3a">Rejected</Typography>
-                                    <Typography size={15} colour="#d23a3a">100</Typography>
+                                    <Typography size={15} colour="#d23a3a">{rejectlength}</Typography>
                                 </View>
+                                </TouchableWithoutFeedback>
+
                             </View>
                             <View style={{ borderLeftWidth: 0.5, paddingLeft: 10 }}>
                                 <PieChart
                                     widthAndHeight={widthAndHeight}
                                     series={series}
                                     sliceColor={sliceColor}
-                                    coverRadius={0.75}
+                                    coverRadius={0.70}
                                     style={{ borderWidth: 1 }}
                                 />
                             </View>
                         </View>
-                        </TouchableWithoutFeedback>
+                        {/* </TouchableWithoutFeedback> */}
                 </Content>
             </Container>
         </>
@@ -181,14 +196,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 5,
+        marginTop:"4%",
+        marginBottom:"2%",
         borderBottomWidth: 0.5
     }
 });
 
 const mapStateToProps = state =>{
     return{
-       favourable: state.favouriteroute.favouriteroute
+       favourable: state.favouriteroute.favouriteroute,
+       bookingstatus: state.Bookingstatus.bookingstatus
     }
 }
 
-export default connect(mapStateToProps,{FavourableRoutes})(Booking);
+export default connect(mapStateToProps,{FavourableRoutes,GetBookingstatus})(Booking);

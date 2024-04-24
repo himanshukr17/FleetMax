@@ -143,7 +143,7 @@ const PendingOrder = (props) => {
 
                                     <Input style={styles.input}
                                           disabled
-                                          value={data.ORDER_DATE}
+                                          value={data.date}
                                     />
                               </View>
                               <View style={styles.feilds}>
@@ -151,7 +151,7 @@ const PendingOrder = (props) => {
 
                                     <Input style={styles.input}
                                           disabled
-                                          value={data.Time}
+                                          value={data.time}
                                     />
                               </View>
 

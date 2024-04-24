@@ -55,11 +55,9 @@ const Route = (props) => {
         props.GetbookingDetails();
         props.GetBookingstatus();
         props.Getvehicledetails();
-        props.Getdriverdetails();
-        
+        props.Getdriverdetails();       
     }, [])
-
-    
+   
     return (
         <NavigationContainer>
             <Drawer.Navigator drawerContent={(props) => (<SideDrawer {...props} />)} headerMode={false} backBehavior='history'>
@@ -86,10 +84,6 @@ const Route = (props) => {
                 <Drawer.Screen name="MapTruck" component={MapTruck} options={{ headerShown: false }} />
                 <Drawer.Screen name="CompOrder" component={CompOrder} options={{ headerShown: false }} />
                 <Drawer.Screen name="POD" component={POD} options={{ headerShown: false }} />
-
-
-
-
             </Drawer.Navigator>
         </NavigationContainer>
     )
