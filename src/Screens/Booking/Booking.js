@@ -148,6 +148,7 @@ const Booking = (props) => {
                                     <Typography size={15} type="bold" colour="#d23a3a">Rejected</Typography>
                                     <Typography size={15} colour="#d23a3a">{rejectlength}</Typography>
                                 </View>
+                                
                                 </TouchableWithoutFeedback>
 
                             </View>
