@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 import { Icon, Divider } from 'react-native-elements';
+import { LogOut } from 'react-native-feather';
 import React, { Component,useEffect,useState } from 'react'
 import Typography from '../Components/typography'
 import { theme } from "../Config/theme"
@@ -7,25 +8,37 @@ import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import { Avatar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Loginid } from '../redux/actions/Loginid';
+import { logout } from '../redux/actions/Loginid'
+// import { logout } from '../redux/actions/Loginid';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 const Drawer = (props) => {
 
+      const navigation = useNavigation();
       // let data = props.userdata;
       // console.log("newdataaaaaa",data.Items[0].USER_NAME)
-
 
       const[iddata ,setIdData] = useState([])
 
       useEffect(()=>{
-
            if(props.userdata){
             setIdData(props.userdata.Items[0])
            }
       },[props.userdata])
-
       // console.log("statedataaaa",iddata.USER_NAME)
+      // const logout = ()=>{
+            // props.userdata.Items[0].USER_NAME="";
+            // props.navigation.navigate("Login")
+            // props.logout()
+             
+      // }
+
+      // useEffect(()=>{
+      //       logout();
+      // },[]);
 
       return (
             <DrawerContentScrollView {...props}>
@@ -60,6 +73,7 @@ const Drawer = (props) => {
 
                                                 <View style={{ marginLeft: 10, marginTop: 3 }}>
                                                  <Typography size={14} color={"black"} style={{ marginTop: 8 }}>{iddata.USER_NAME}</Typography> 
+
                                                 </View>
 
                                     </View>
@@ -91,6 +105,15 @@ const Drawer = (props) => {
                               onPress={() => props.navigation.navigate("CompOrder")}
                         />
                         <Divider style={{ backgroundColor: "black", height: 0.4, marginLeft: -3 }} />
+                      {/* <TouchableOpacity  onPress={()=> { props.logout() } }> */}
+                      <TouchableOpacity   onPress={()=>{props.logout()}}>
+                        <View style={{flexDirection:'row',marginLeft:"8%",marginTop: "4%", marginBottom:"4%" }}>
+                        <LogOut width={32} height={32} color="black"/>
+                        <Typography style={{marginLeft:"6%"}}size={16} color={"black"} >Logout</Typography>
+                        </View>                        
+                      </TouchableOpacity>
+                      
+                        <Divider style={{ backgroundColor: "black", height: 0.4, marginLeft: -3 }} />
 
                   </View>
             </DrawerContentScrollView>
@@ -117,4 +140,4 @@ const mapStateToProps = (state)=>{
       }
 }
 
-export default connect(mapStateToProps,{Loginid})(Drawer)
+export default connect(mapStateToProps,{Loginid,logout})(Drawer)

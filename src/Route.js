@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 import LottieSplashScreen from "react-native-lottie-splash-screen";
 import Login from "./Screens/Onboarding/Login";
 import { NavigationContainer } from '@react-navigation/native';
@@ -35,33 +36,35 @@ import { GetbookingDetails } from "./redux/actions/GetbookingDetails";
 import { GetBookingstatus } from "./redux/actions/GetBookingstatus";
 import { Getvehicledetails } from "./redux/actions/Getvehicledetails";
 import { Getdriverdetails } from "./redux/actions/GetDriverDetails";
+// import { Loginid } from "./redux/actions/Loginid";
 // import { Statusupdate } from "./redux/actions/Statusupdate";
-
-
-
 
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 
 
 const Route = (props) => {
+    console.log("isAuth-------->>>>>>", props.logindata?.Items )
     useEffect(() => {
         LottieSplashScreen.hide()
-        console.log("working")
-        //    props.GetDeliveryDetails('20230303to20230310')
+        // console.log("working",props.logindata)
+           props.GetDeliveryDetails('20230303to20230310')
+        if(props.logindata?.Items!=undefined ){
         props.FavourableRoutes();
         props.GetbookingDetails();
         props.GetBookingstatus();
         props.Getvehicledetails();
-        props.Getdriverdetails();       
+        props.Getdriverdetails();    
+    }   
     }, [])
    
     return (
         <NavigationContainer>
-            <Drawer.Navigator drawerContent={(props) => (<SideDrawer {...props} />)} headerMode={false} backBehavior='history'>
-                <Drawer.Screen name="Login" component={Login} options={{ headerShown: false }} />
+
+            { props.logindata?.Items!=undefined ? <Drawer.Navigator drawerContent={(props) => (<SideDrawer {...props} />)} headerMode={false} backBehavior='history'>
                 <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
                 <Drawer.Screen name="Booking" component={Booking} options={{ headerShown: false }} />
                 <Drawer.Screen name="GetDirection" component={GetDirection} options={{ headerShown: false }} />
@@ -85,17 +88,25 @@ const Route = (props) => {
                 <Drawer.Screen name="CompOrder" component={CompOrder} options={{ headerShown: false }} />
                 <Drawer.Screen name="POD" component={POD} options={{ headerShown: false }} />
             </Drawer.Navigator>
+            :
+            // <Drawer.Navigator>
+            // <Drawer.Screen name="Login" component={Login} options={{ headerShown: false }} />
+            // </Drawer.Navigator>}
+            <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login} options={{ headerShown: false}}/>
+                </Stack.Navigator>}
+          
         </NavigationContainer>
     )
 
 
 }
 
-// const mapStateToProps =state=>{
-//     return{
-//         favourateroute: state.favourateroute.favouriteroute,
+const mapStateToProps =state=>{
+    return{
+        // favourateroute: state.favourateroute.favouriteroute,
+        logindata:state.logindata.logindata
+    }
+}
 
-//     }
-// }
-
-export default connect( null,{ GetDeliveryDetails, FavourableRoutes, GetbookingDetails, GetBookingstatus, Getvehicledetails, Getdriverdetails })(Route);
+export default connect( mapStateToProps,{ GetDeliveryDetails, FavourableRoutes, GetbookingDetails, GetBookingstatus, Getvehicledetails, Getdriverdetails })(Route);

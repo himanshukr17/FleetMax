@@ -24,14 +24,15 @@ const PendingOrder = (props) => {
       // let dataid = props.userID.Items[0].USER_ID
       // console.log("login id123 ----->", dataid);
 
-      let value = props.route.params
-      console.log("screen ", value)
+      // let value = props.route.params
+      // console.log("screen ", value)
 
-      const [data, setData] = useState(value)
+      const [data, setData] = useState({})
 
-      // useEffect (()=>{
+      useEffect (()=>{
 
-      // },[data]);
+            setData( props.route.params)
+      },[ props.route.params]);
 
 
       const [menloop, setmenloop] = useState(1)

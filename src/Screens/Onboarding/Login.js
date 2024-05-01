@@ -40,7 +40,7 @@ const Login = (props) => {
                     backgroundColor:"green",
                     // duration:Snackbar.LENGTH_SHORT
                 })
-                props.navigation.navigate("Home");
+                // props.navigation.navigate("Home");
 
             }
          }).catch(err=>{

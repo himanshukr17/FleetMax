@@ -41,3 +41,10 @@ export const Loginid = (userid, pas) => async (dispatch, getState) => {
       });
   });
 };
+
+
+export const logout = () => (dispatch, getState) => {
+
+  dispatch({ type: "LOGINDATA", payload:null });
+  
+}
