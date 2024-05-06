@@ -116,7 +116,7 @@ const PendingOrder = (props) => {
                   <Content>
                         <View style={{ marginTop: "7%", marginLeft: "3%" }}>
                               <View style={styles.feilds}>
-                                    <Typography size={17}>Order Number</Typography>
+                                    <Typography size={17}>Order Number</Typography>   
                                     <Input style={styles.input}
                                           value={data.ORDER_NO}
                                           disabled

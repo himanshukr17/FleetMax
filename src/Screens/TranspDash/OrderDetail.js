@@ -85,7 +85,7 @@ const OrderDetail = (props,{route}) => {
                                     return (<>
                                           {items.STATUS ?<TouchableWithoutFeedback
                                                 key={items}
-                                                onPress={() => props.navigation.navigate(items.STATUS==="Accept"?"AcceptedOrder":"RejectedOrder",{...items,date:date,time:time})}>
+                                                onPress={() => props.navigation.navigate(items.STATUS==="Accept"?"AcceptedOrder":items.STATUS==="Pending"?"PendingOrder":"RejectedOrder",{...items,date:date,time:time})}>
                                                 {/* onPress={() => props.navigation.navigate(items.STATUS==="Pending"?"PendingOrder":items.STATUS==="Accept"?"AcceptedOrder":"RejectedOrder",{...items,date:date,time:time})}> */}
 
                                                 {/* { items.STATUS === "Accepted" && ( */}

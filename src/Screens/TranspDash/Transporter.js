@@ -460,4 +460,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {GetbookingDetails})(Transporter);
+export default connect(mapStateToProps, {GetbookingDetails})(Transporter); 
